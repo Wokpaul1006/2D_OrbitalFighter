@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ThornSC : EBullet
+{
+    [HideInInspector] PlayerSC player;
+    void Start()
+    {
+        moveSpd = 10f;
+        damage = 3;
+        player = GameObject.Find("Player(Clone)").GetComponent<PlayerSC>();
+        StartCoroutine(selfDestruct());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        OnMoveDown(moveSpd);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            player.OnTakeDamage(damage);
+            Destroy(gameObject);
+        }else if(collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")
+        {
+            Destroy(gameObject);
+        }
+    }
+    private IEnumerator selfDestruct()
+    {
+        yield return new WaitForSeconds(moveSpd * 1.5f);
+        Destroy(gameObject);
+        StartCoroutine(selfDestruct());
+    }
+}
