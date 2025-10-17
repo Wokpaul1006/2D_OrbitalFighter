@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class OmniMN : Singleton<OmniMN>
 {
@@ -16,6 +17,8 @@ public class OmniMN : Singleton<OmniMN>
     [HideInInspector] public int platformType, gameMode;
     [HideInInspector] private int hasPlayed; //Use this variable for check FirstPlay.
 
+
+    public string toDay;
     private void Awake()
     {
         DontDestroyOnLoad(this);
@@ -29,6 +32,7 @@ public class OmniMN : Singleton<OmniMN>
     {
         SettingStart();
         OnCheckPlay();
+        toDay = DateTime.Today.Day.ToString();
         versionTxt.text = Application.version.ToString();
     }
     public void OnChangeScene(sbyte sceneOder)

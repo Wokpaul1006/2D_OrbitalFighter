@@ -16,6 +16,10 @@ public class DataSC : MonoBehaviour
     [HideInInspector] public int curAbilitySelected;
     [HideInInspector] private int curThemeState, curSFXState;
     [HideInInspector] OptionSC option;
+
+    public int pAllowClaimDaily;
+    public int pDailyStreak;
+    public string pLastDailyClaim;
     private void Awake()
     {
         DontDestroyOnLoad(this);
@@ -57,6 +61,16 @@ public class DataSC : MonoBehaviour
         //System Control
         PlayerPrefs.SetInt("SFXState", 1);
         PlayerPrefs.SetInt("ThemeState", 1);
+
+        //Patrol Reward
+        PlayerPrefs.SetInt("AllowClaimDaily", 0);
+        PlayerPrefs.SetInt("AllowClaimMonthly", 0);
+        PlayerPrefs.SetString("LastPatrolDailyTime", "");
+        PlayerPrefs.SetString("LastPatrolMonthlyTime", "");
+        PlayerPrefs.SetInt("PatrolDailyStreak", 0);
+        PlayerPrefs.SetInt("PatrolMonthlyStreak", 0);
+
+        Invoke("LoadOldPlayer", 3f); //De tam thoi
     }
     public void GetOldPlayer()
     {
@@ -76,6 +90,14 @@ public class DataSC : MonoBehaviour
         curAPCharge = PlayerPrefs.GetInt("CurAPChargeLv");
         curAmmoLoadSpd = PlayerPrefs.GetInt("CurUpgradeReloadLv");
         curAmor = PlayerPrefs.GetInt("CurArmorLevel");
+
+        //Patrol Reward
+        pLastDailyClaim = PlayerPrefs.GetString("LastPatrolDailyTime");
+        //pLastMonthlyClaim = PlayerPrefs.GetString("LastPatrolMonthlyTime");
+        pAllowClaimDaily = PlayerPrefs.GetInt("AllowClaimDaily");
+        //pAllowClaimMonthly = PlayerPrefs.GetInt("AllowClaimMonthly");
+        pDailyStreak = PlayerPrefs.GetInt("PatrolDailyStreak");
+        //pMonthlyStreak = PlayerPrefs.GetInt("PatrolMonthlyStreak");
 
         CheckSoundState();
     }
@@ -104,4 +126,88 @@ public class DataSC : MonoBehaviour
         PlayerPrefs.SetInt("Highscore", playerHighscore);
     }
     public void DeletePlayer() { PlayerPrefs.DeleteAll(); }
+
+    #region Data Update
+    public void UpdatePName(string name)
+    {
+        PlayerPrefs.SetString("PlayerName", name);
+        playerName = PlayerPrefs.GetString("PlayerName");
+    }
+    public void UpdateHighScore(int highScore)
+    {
+        PlayerPrefs.SetInt("Highscore", highScore);
+        playerHighscore = PlayerPrefs.GetInt("Highscore");
+    }
+    //public void UpdateHighLv(int highLv)
+    //{
+    //    PlayerPrefs.SetInt("PHighestLevel", highLv);
+    //    p = PlayerPrefs.GetInt("PHighestLevel");
+    //}
+    //public void UpdateStoryLv(int curStoryLv)
+    //{
+    //    PlayerPrefs.SetInt("CurrentStoryLevel", curStoryLv);
+    //    pStoryLvl = PlayerPrefs.GetInt("CurrentStoryLevel");
+    //}
+    public void UpdateTotalScore(int currency)
+    {
+        PlayerPrefs.SetInt("Totalscore", currency);
+        playerCoin = PlayerPrefs.GetInt("Totalscore");
+    }
+    public void UpdateTotalGem(int gems)
+    {
+        PlayerPrefs.SetInt("TotalGems", gems);
+        playerGems = PlayerPrefs.GetInt("TotalGems");
+    }
+    public void UpdateSFXState(int sfxState)
+    {
+        PlayerPrefs.SetInt("sfxState", sfxState);
+        curSFXState = PlayerPrefs.GetInt("sfxState");
+    }
+    public void UpdateThemeState(int thameState)
+    {
+        PlayerPrefs.SetInt("soundState", thameState);
+        curThemeState = PlayerPrefs.GetInt("soundState");
+    }
+    public void UpdateAbility(int abilityOder)
+    {
+        PlayerPrefs.SetInt("CurAblility", abilityOder);
+        curAbilitySelected = PlayerPrefs.GetInt("CurAblility");
+    }
+    public void UpdateWeapon(int weaponOder)
+    {
+        PlayerPrefs.SetInt("CurWeaponID", weaponOder);
+        if(curWeaponSelected_SlotA == 0)
+        {
+            curWeaponSelected_SlotA = PlayerPrefs.GetInt("CurWeaponID");
+        }else if(curWeaponSelected_SlotA != 0 && curWeaponSelected_SlotB == 0)
+        {
+            curWeaponSelected_SlotB = PlayerPrefs.GetInt("CurWeaponID");
+        }else if(curWeaponSelected_SlotA != 0 && curWeaponSelected_SlotB != 0) { }
+
+    }
+    public void UpdatePatrolDailyReward(string lastPatrolDaily)
+    {
+        PlayerPrefs.SetString("LastPatrolDailyTime", lastPatrolDaily);
+        pLastDailyClaim = PlayerPrefs.GetString("LastPatrolDailyTime");
+    }
+    public void UpdateAllowClaimDaily(int state)
+    {
+        PlayerPrefs.SetInt("AllowClaimDaily", state);
+        pAllowClaimDaily = PlayerPrefs.GetInt("AllowClaimAllowClaimDaily");
+    }
+    public void UpdateStreak(int typeStreak, int value)
+    {
+        switch (typeStreak)
+        {
+            case 1:
+                PlayerPrefs.SetInt("PatrolDailyStreak", value);
+                pDailyStreak = value;
+                break;
+            //case 2:
+            //    PlayerPrefs.SetInt("PatrolMonthlyStreak", value);
+            //    pMonthlyStreak = value;
+            //    break;
+        }
+    }
+    #endregion
 }

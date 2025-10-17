@@ -19,10 +19,9 @@ public class MainMenuSC : MonoBehaviour
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         data = GameObject.Find("OBJ_DataCtr").GetComponent<DataSC>();
         adsMN = GameObject.Find("AdsMN").GetComponent<AdsMN>();
-        gemToShow = data.playerGems;
-        cointToShow = data.playerCoin;
+
+        LoadUserInRuntime();
         ClearAllPanels();
-        OnSetUI();
         panelContainer.gameObject.SetActive(false);
     }
     private void OnSetUI()
@@ -37,6 +36,13 @@ public class MainMenuSC : MonoBehaviour
         {
             if(panels[i].activeSelf) panels[i].gameObject.SetActive(false);
         }
+    }
+    public void LoadUserInRuntime()
+    {
+        //Call everytime in-game need to load data
+        gemToShow = data.playerGems;
+        cointToShow = data.playerCoin;
+        OnSetUI();
     }
     #region Switch Scene & Panels
     public void OnToArena() => genCtr.OnChangeScene(1);

@@ -12375,7 +12375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 551728722966836625, guid: 9592be0edef36be4f8b05a6aa50fda4c, type: 3}
       propertyPath: m_Text
-      value: PAUSE
+      value: YOU LOOSE!
       objectReference: {fileID: 0}
     - target: {fileID: 551728722966836625, guid: 9592be0edef36be4f8b05a6aa50fda4c, type: 3}
       propertyPath: m_Color.b
