@@ -57,7 +57,7 @@ public class PlayerSC : MonoBehaviour
             }
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemies" || collision.gameObject.tag == "EAmmo")
         {
@@ -198,8 +198,7 @@ public class PlayerSC : MonoBehaviour
             {
                 if (isReload == false)
                 {
-                    Instantiate(bullet, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
-                    ammoCur--;
+                    InvokeRepeating(nameof(OnFire), 0f, 1f);
                     genCtr.PlayDefault();
                     if (ammoCur <= 0)
                     {
@@ -215,6 +214,12 @@ public class PlayerSC : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnFire()
+    {
+        Instantiate(bullet, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
+        ammoCur--;
     }
     private void OnFireNormalByKey()
     {

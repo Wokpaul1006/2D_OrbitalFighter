@@ -9,12 +9,10 @@ public class PatrolEarnSC : MonoBehaviour
     [HideInInspector] DataSC data;
     [HideInInspector] OmniMN genCtr;
     [SerializeField] List<GameObject> rewardDailyLocker = new List<GameObject>();
-    [SerializeField] List<GameObject> rewardMonthlyLocker = new List<GameObject>();
     [HideInInspector] MainMenuSC menu;
     [SerializeField] List<GameObject> dailyGrid = new List<GameObject>();
 
     [SerializeField] Button claimDailyBtn;
-    [SerializeField] List<GameObject> monthlyGrid = new List<GameObject>();
 
     private const string LastPatrolTimeKey = "LastPatrolTime";
     private const string PatrolStreakKey = "PatrolStreak";
@@ -27,7 +25,7 @@ public class PatrolEarnSC : MonoBehaviour
     {
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         data = GameObject.Find("OBJ_DataCtr").GetComponent<DataSC>();
-        menu = GameObject.Find("MenuMN").GetComponent<MainMenuSC>();
+        menu = GameObject.Find("Main_MN").GetComponent<MainMenuSC>();
 
         isAllowDailyClaim = false;
         streakDaily = data.pDailyStreak;

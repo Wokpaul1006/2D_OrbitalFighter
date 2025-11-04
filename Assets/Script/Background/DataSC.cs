@@ -77,7 +77,7 @@ public class DataSC : MonoBehaviour
         //This function load player information if there are not FIRST PLAY
         playerName = PlayerPrefs.GetString("PlayerName");
         playerHighscore = PlayerPrefs.GetInt("Highscore");
-        playerCoin = PlayerPrefs.GetInt("Totalscore");
+        playerCoin = PlayerPrefs.GetInt("Totalscore")+100;
         playerGems = PlayerPrefs.GetInt("TotalGems");
         curWeaponSelected_SlotA = PlayerPrefs.GetInt("CurWeaponSlot_A");
         curWeaponSelected_SlotB = PlayerPrefs.GetInt("CurWeaponSlot_B");
