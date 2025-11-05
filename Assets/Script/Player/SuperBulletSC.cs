@@ -15,4 +15,8 @@ public class SuperBulletSC : MonoBehaviour
     {
         
     }
+    virtual internal void AutoAttack()
+    {
+
+    }
 }

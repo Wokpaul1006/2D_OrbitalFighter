@@ -9,20 +9,18 @@ public class MainMenuSC : MonoBehaviour
     [HideInInspector] OmniMN genCtr;
     [HideInInspector] DataSC data;
     [HideInInspector] AdsMN adsMN;
-    [SerializeField] GameObject panelContainer;
     [SerializeField] Text gemTxt, coinTxtl;
     public List<GameObject> panels = new List<GameObject>();
-
+    public WarningPanelSC warningPnl;
     private int cointToShow, gemToShow;
     private void Start()
     {
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         data = GameObject.Find("OBJ_DataCtr").GetComponent<DataSC>();
         adsMN = GameObject.Find("AdsMN").GetComponent<AdsMN>();
-
+        warningPnl = GameObject.Find("PNL_WarningPnl").GetComponent<WarningPanelSC>();
         LoadUserInRuntime();
         ClearAllPanels();
-        panelContainer.gameObject.SetActive(false);
     }
     private void OnSetUI()
     {
@@ -36,6 +34,7 @@ public class MainMenuSC : MonoBehaviour
         {
             if(panels[i].activeSelf) panels[i].gameObject.SetActive(false);
         }
+        warningPnl.gameObject.SetActive(false);
     }
     public void LoadUserInRuntime()
     {
@@ -52,10 +51,14 @@ public class MainMenuSC : MonoBehaviour
     public void OnExit() => genCtr.OnChangeScene(5);
     public void OnToOption() => genCtr.OnShowOption();
     public void OnUserInfor() => genCtr.OnShowInforPanel();
+    public void OnShowWarningPanel(int callOrder, int contentOrder)
+    {
+        warningPnl.gameObject.SetActive(true);
+        warningPnl.ShowContent(callOrder, contentOrder);
+    }
     public void OnShowPanels()
     {
         ClearAllPanels();
-        panelContainer.gameObject.SetActive(true);
     }
     #endregion
 

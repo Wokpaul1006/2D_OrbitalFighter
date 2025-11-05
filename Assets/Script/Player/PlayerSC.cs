@@ -91,9 +91,11 @@ public class PlayerSC : MonoBehaviour
         ammoCur = data.curAmmoMax * baseAmmo;
         curWeaponA = data.curWeaponSelected_SlotA;
         curWeaponB = data.curWeaponSelected_SlotB;
+
         SetReload();
         SetRegentHp();
         SetAmour();
+        //SetSecondary();
 
         //Update more code of additional weapon here
         if (genCtr.gameMode == 1) 
@@ -271,29 +273,6 @@ public class PlayerSC : MonoBehaviour
         }
     }
     public void CallReloadHealth() => StartCoroutine(RegentHealth());
-    public void OnUseSecondary()
-    {
-        if (curWeaponA != 0)
-        {
-        }
-
-        if(curWeaponB != 0)
-        {
-
-        }
-    }
-    private void SecondaryFireRepeat()
-    {
-
-    }
-    private void SecondaryFireSequenc()
-    {
-
-    }
-    private void SecondayFireOnCommand()
-    {
-
-    }
     #endregion
     public void OnTakeDamage(int dmg)
     {

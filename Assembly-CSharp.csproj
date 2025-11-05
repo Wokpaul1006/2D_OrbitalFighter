@@ -89,6 +89,7 @@
     <Compile Include="Assets\Script\Background\OmniMN.cs" />
     <Compile Include="Assets\Script\Background\DialougeSC.cs" />
     <Compile Include="Assets\Script\Enemy\ArachilingsSC.cs" />
+    <Compile Include="Assets\Script\Player\SecondaryWeapSC.cs" />
     <Compile Include="Assets\Script\Background\SpawnerSC.cs" />
     <Compile Include="Assets\Script\Player\MagneticShieldSC.cs" />
     <Compile Include="Assets\Script\Enemy\ThornSC.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Assets\Script\Enemy\MaciliozSC.cs" />
     <Compile Include="Assets\Script\Enemy\BroodpinosSC.cs" />
     <Compile Include="Assets\Script\UIs\PauseSC.cs" />
+    <Compile Include="Assets\WarningPanelSC.cs" />
     <Compile Include="Assets\Script\Background\ThemeMN.cs" />
     <Compile Include="Assets\Script\Ads\AdConfig.cs" />
     <Compile Include="Assets\Script\UIs\ShopSC.cs" />

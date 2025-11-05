@@ -43,7 +43,7 @@ public class DataSC : MonoBehaviour
         //Player information
         PlayerPrefs.SetString("PlayerName", nameFistPlay);
         PlayerPrefs.SetInt("Highscore", 0); //For total overview, leaderboard
-        PlayerPrefs.SetInt("Totalscore", 0); //Actual player in-game currency
+        PlayerPrefs.SetInt("Totalscore", 1000); //Actual player in-game currency
         PlayerPrefs.SetInt("TotalGems", 0); //Player's PIA currency
         PlayerPrefs.SetInt("CurWeaponSlot_A", 0); //index of weapon order in list. 0 is non
         PlayerPrefs.SetInt("CurWeaponSlot_B", 0); //index of weapon order in list. 0 is non
@@ -77,11 +77,14 @@ public class DataSC : MonoBehaviour
         //This function load player information if there are not FIRST PLAY
         playerName = PlayerPrefs.GetString("PlayerName");
         playerHighscore = PlayerPrefs.GetInt("Highscore");
-        playerCoin = PlayerPrefs.GetInt("Totalscore")+100;
+        playerCoin = PlayerPrefs.GetInt("Totalscore");
         playerGems = PlayerPrefs.GetInt("TotalGems");
         curWeaponSelected_SlotA = PlayerPrefs.GetInt("CurWeaponSlot_A");
         curWeaponSelected_SlotB = PlayerPrefs.GetInt("CurWeaponSlot_B");
         curAbilitySelected = PlayerPrefs.GetInt("CurAblility");
+
+        print("curWeaponSelected_SlotA = " + curWeaponSelected_SlotA);
+        print("curWeaponSelected_SlotB = " + curWeaponSelected_SlotB);
 
         curDmgMax = PlayerPrefs.GetInt("CurUpgradeDmg");
         curHealthMax = PlayerPrefs.GetInt("CurUpgradeHP");
@@ -178,12 +181,15 @@ public class DataSC : MonoBehaviour
         PlayerPrefs.SetInt("CurWeaponID", weaponOder);
         if(curWeaponSelected_SlotA == 0)
         {
-            curWeaponSelected_SlotA = PlayerPrefs.GetInt("CurWeaponID");
+            PlayerPrefs.SetInt("CurWeaponSlot_A", weaponOder);
+            curWeaponSelected_SlotA = PlayerPrefs.GetInt("CurWeaponSlot_A");
         }else if(curWeaponSelected_SlotA != 0 && curWeaponSelected_SlotB == 0)
         {
-            curWeaponSelected_SlotB = PlayerPrefs.GetInt("CurWeaponID");
-        }else if(curWeaponSelected_SlotA != 0 && curWeaponSelected_SlotB != 0) { }
-
+            PlayerPrefs.SetInt("CurWeaponSlot_B", weaponOder);
+            curWeaponSelected_SlotB = PlayerPrefs.GetInt("CurWeaponSlot_B");
+        }
+        else if(curWeaponSelected_SlotA != 0 && curWeaponSelected_SlotB != 0) 
+        { }
     }
     public void UpdatePatrolDailyReward(string lastPatrolDaily)
     {

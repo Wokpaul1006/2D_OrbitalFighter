@@ -37,12 +37,12 @@ public class ShopSC : MonoBehaviour
         prefSlotB = data.curWeaponSelected_SlotB;
 
         UpdateShopUIs(); //Init call
-        print("Data Player: coin = " + prefCoins + " gem = " + prefGem + " slotA: " + prefSlotA + " SlotB: " + prefSlotB);
     }
-    void UpdatePlayerData(int coin, int slotA, int slotB)
+    void UpdatePlayerData(int coin, int weaponOrder)
     {
         //Call each time buy something
-        data.UpdatePlayerStatToPlayerPrefs(prefCoins);
+        data.UpdateTotalScore(coin);
+        data.UpdateWeapon(weaponOrder);
         SetCurrency();
     }
     void UpdateShopUIs()
@@ -74,7 +74,7 @@ public class ShopSC : MonoBehaviour
     #region buy items
     private bool CheckBuy(int pCoin, int itemPrice)
     {
-        if(pCoin > itemPrice)
+        if (pCoin > itemPrice)
         {
             int temp = pCoin - itemPrice;
             if (temp >= 0)
@@ -82,114 +82,142 @@ public class ShopSC : MonoBehaviour
                 return true;
             }
             else return false;
-        }else        return false;
+        }else
+        {
+            menuCtr.OnShowWarningPanel(2, 2);
+            return false;
+        }
     }
+    private void HandleNotAllowBuy(int nameOrder, int contentOrder) 
+    {
+        menuCtr.OnShowWarningPanel(nameOrder, contentOrder);
+    } 
     public void OnBuyGatling()
     {
+        print("in buy gatling");
         if(CheckBuy(prefCoins, priceGatling) == true)
         {
-            if(prefSlotA != 0 && prefSlotB != 0)
+            if (prefSlotA != 0 && prefSlotB != 0)
             {
                 //Not allow to buy
+                HandleNotAllowBuy(1,1);
             }else if (prefSlotA == 0 && prefSlotB == 0 || prefSlotA == 0 && prefSlotB != 0)
             {
                 //Slot A free || Slot A & B free
                 int newCoin = prefCoins - priceGatling;
-                UpdatePlayerData(indexGetling, prefSlotB, newCoin);
+                UpdatePlayerData(newCoin, indexGetling);
+                HandleNotAllowBuy(3, 3);
             }
             else if (prefSlotA != 0 && prefSlotB == 0)
             {
                 //Slot B free, Slot A occupied
                 int newCoin = prefCoins - priceGatling;
-                UpdatePlayerData(prefSlotA, indexGetling, newCoin);
+                UpdatePlayerData(newCoin, indexGetling);
+                HandleNotAllowBuy(3, 3);
             }
         }
     }
     public void OnBuyDrone()
     {
+        print("in buy drone");
         if (CheckBuy(prefCoins, priceDrone) == true)
         {
             if (prefSlotA != 0 && prefSlotB != 0)
             {
                 //Not allow to buy
+                HandleNotAllowBuy(1,1);
             }
             else if (prefSlotA == 0 && prefSlotB == 0 || prefSlotA == 0 && prefSlotB != 0)
             {
                 //Slot A free || Slot A & B free
                 int newCoin = prefCoins - priceDrone;
-                UpdatePlayerData(indexDrone, prefSlotB, newCoin);
+                UpdatePlayerData(newCoin, indexDrone);
+                HandleNotAllowBuy(3, 3);
             }
             else if (prefSlotA != 0 && prefSlotB == 0)
             {
                 //Slot B free, Slot A occupied
                 int newCoin = prefCoins - priceDrone;
-                UpdatePlayerData(prefSlotA, indexDrone, newCoin);
+                UpdatePlayerData(newCoin, indexDrone);
+                HandleNotAllowBuy(3, 3);
             }
         }
     }
     public void OnBuyMissile()
     {
+        print("in buy missle");
         if (CheckBuy(prefCoins, priceMissle) == true)
         {
             if (prefSlotA != 0 && prefSlotB != 0)
             {
                 //Not allow to buy
+                HandleNotAllowBuy(1,1);
             }
             else if (prefSlotA == 0 && prefSlotB == 0 || prefSlotA == 0 && prefSlotB != 0)
             {
                 //Slot A free || Slot A & B free
                 int newCoin = prefCoins - priceMissle;
-                UpdatePlayerData(indexMissle, prefSlotB, newCoin);
+                UpdatePlayerData(newCoin, indexMissle);
+                HandleNotAllowBuy(3, 3);
             }
             else if (prefSlotA != 0 && prefSlotB == 0)
             {
                 //Slot B free, Slot A occupied
                 int newCoin = prefCoins - priceMissle;
-                UpdatePlayerData(prefSlotA, indexMissle, newCoin);
+                UpdatePlayerData(newCoin, indexMissle);
+                HandleNotAllowBuy(3, 3);
             }
         }
     }
     public void OnBuyAbzalat()
     {
+        print("in buy abzalat");
         if (CheckBuy(prefCoins, priceAbzalat) == true)
         {
             if (prefSlotA != 0 && prefSlotB != 0)
             {
                 //Not allow to buy
+                HandleNotAllowBuy(1, 1);
             }
             else if (prefSlotA == 0 && prefSlotB == 0 || prefSlotA == 0 && prefSlotB != 0)
             {
                 //Slot A free || Slot A & B free
                 int newCoin = prefCoins - priceAbzalat;
-                UpdatePlayerData(indexAbzalat, prefSlotB, newCoin);
+                UpdatePlayerData(newCoin, indexAbzalat);
+                HandleNotAllowBuy(3, 3);
             }
             else if (prefSlotA != 0 && prefSlotB == 0)
             {
                 //Slot B free, Slot A occupied
                 int newCoin = prefCoins - priceAbzalat;
-                UpdatePlayerData(prefSlotA, indexAbzalat, newCoin);
+                UpdatePlayerData(newCoin, indexAbzalat);
+                HandleNotAllowBuy(3, 3);
             }
         }
     }
     public void OnBuyFlameThrowler()
     {
+        print("in buy flame");
         if (CheckBuy(prefCoins, priceFlame) == true)
         {
             if (prefSlotA != 0 && prefSlotB != 0)
             {
                 //Not allow to buy
+                HandleNotAllowBuy(1, 1);
             }
             else if (prefSlotA == 0 && prefSlotB == 0 || prefSlotA == 0 && prefSlotB != 0)
             {
                 //Slot A free || Slot A & B free
                 int newCoin = prefCoins - priceFlame;
-                UpdatePlayerData(indexFlame, prefSlotB, newCoin);
+                UpdatePlayerData(newCoin, indexFlame);
+                HandleNotAllowBuy(3, 3);
             }
             else if (prefSlotA != 0 && prefSlotB == 0)
             {
                 //Slot B free, Slot A occupied
                 int newCoin = prefCoins - priceFlame;
-                UpdatePlayerData(prefSlotA, indexFlame, newCoin);
+                UpdatePlayerData(newCoin, indexFlame);
+                HandleNotAllowBuy(3, 3);
             }
         }
     }
@@ -200,18 +228,21 @@ public class ShopSC : MonoBehaviour
             if (prefSlotA != 0 && prefSlotB != 0)
             {
                 //Not allow to buy
+                HandleNotAllowBuy(1, 1);
             }
             else if (prefSlotA == 0 && prefSlotB == 0 || prefSlotA == 0 && prefSlotB != 0)
             {
                 //Slot A free || Slot A & B free
                 int newCoin = prefCoins - priceRocketPod;
-                UpdatePlayerData(indexRocketPod, prefSlotB, newCoin);
+                UpdatePlayerData(newCoin, indexRocketPod);
+                HandleNotAllowBuy(3, 3);
             }
             else if (prefSlotA != 0 && prefSlotB == 0)
             {
                 //Slot B free, Slot A occupied
                 int newCoin = prefCoins - priceRocketPod;
-                UpdatePlayerData(prefSlotA, indexRocketPod, newCoin);
+                UpdatePlayerData(newCoin, indexRocketPod);
+                HandleNotAllowBuy(3, 3);
             }
         }
     }
@@ -222,18 +253,21 @@ public class ShopSC : MonoBehaviour
             if (prefSlotA != 0 && prefSlotB != 0)
             {
                 //Not allow to buy
+                HandleNotAllowBuy(1, 1);
             }
             else if (prefSlotA == 0 && prefSlotB == 0 || prefSlotA == 0 && prefSlotB != 0)
             {
                 //Slot A free || Slot A & B free
                 int newCoin = prefCoins - priceSword;
-                UpdatePlayerData(indexSword, prefSlotB, newCoin);
+                UpdatePlayerData(newCoin, indexRocketPod);
+                HandleNotAllowBuy(3, 3);
             }
             else if (prefSlotA != 0 && prefSlotB == 0)
             {
                 //Slot B free, Slot A occupied
                 int newCoin = prefCoins - priceSword;
-                UpdatePlayerData(prefSlotA, indexSword, newCoin);
+                UpdatePlayerData(newCoin, indexRocketPod);
+                HandleNotAllowBuy(3, 3);
             }
         }
     }
@@ -244,18 +278,21 @@ public class ShopSC : MonoBehaviour
             if (prefSlotA != 0 && prefSlotB != 0)
             {
                 //Not allow to buy
+                HandleNotAllowBuy(1, 1);
             }
             else if (prefSlotA == 0 && prefSlotB == 0 || prefSlotA == 0 && prefSlotB != 0)
             {
                 //Slot A free || Slot A & B free
                 int newCoin = prefCoins - priceShield;
-                UpdatePlayerData(indexShile, prefSlotB, newCoin);
+                UpdatePlayerData(newCoin, indexRocketPod);
+                HandleNotAllowBuy(3, 3);
             }
             else if (prefSlotA != 0 && prefSlotB == 0)
             {
                 //Slot B free, Slot A occupied
                 int newCoin = prefCoins - priceShield;
-                UpdatePlayerData(prefSlotA, indexShile, newCoin);
+                UpdatePlayerData(newCoin, indexRocketPod);
+                HandleNotAllowBuy(3, 3);
             }
         }
     }
@@ -264,8 +301,10 @@ public class ShopSC : MonoBehaviour
     #region SetItem
     private void SetCurrency()
     {
-        coinText.text = prefCoins.ToString() + " C";
-        gemText.text = prefGem.ToString() + " D";
+        prefCoins = data.playerCoin;
+        prefGem = data.playerGems;
+        coinText.text = prefCoins.ToString();
+        gemText.text = prefGem.ToString();
     }
     private void SetGatling()
     {
