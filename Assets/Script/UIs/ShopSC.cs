@@ -29,6 +29,10 @@ public class ShopSC : MonoBehaviour
         GetPlayerData();
         SetButtonLisenter();
     }
+    private void OnEnable()
+    {
+        GetPlayerData();
+    }
     void GetPlayerData()
     {
         prefCoins = data.playerCoin;

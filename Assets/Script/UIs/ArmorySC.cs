@@ -7,7 +7,7 @@ public class ArmorySC : MonoBehaviour
 {
     [HideInInspector] OmniMN genCtr;
     [HideInInspector] DataSC data;
-
+    [HideInInspector] MainMenuSC menuCtr;
     [SerializeField] Text pMoneyTxt;
     [SerializeField] Text priceDmgTxt, priceHPMaxTxt, priceMgzSzTxt, priceAmorTxt, priceReloadTxt, priceRegentTxt;
     [SerializeField] Text curDmgTxt, curHPTxt, curMgzSizeTxt, curAmorTxt, curReloadSpdTxt, curRegentTxt;
@@ -22,21 +22,26 @@ public class ArmorySC : MonoBehaviour
     {
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         data = GameObject.Find("OBJ_DataCtr").GetComponent<DataSC>();
+        menuCtr = GameObject.Find("Main_MN").GetComponent<MainMenuSC>();
     }
     void Start()
     {
         GetPlayer();
     }
-    #region gameplay handle
-    void GetPlayer()
+    void OnEnable()
     {
-        prefDmg = PlayerPrefs.GetInt("CurUpgradeDmg");
-        prefHPMax = PlayerPrefs.GetInt("CurUpgradeHP");
-        prefMgzSize = PlayerPrefs.GetInt("CurUpgradeMgz");
-        prefAmor = PlayerPrefs.GetInt("CurArmorLevel");
-        prefRegentSpd = PlayerPrefs.GetInt("CurUpgradeRegen");
-        prefReloadSpd = PlayerPrefs.GetInt("CurUpgradeReloadLv");
-        prefCoins = PlayerPrefs.GetInt("Totalscore");
+        GetPlayer();
+    }
+    #region gameplay handle
+    public void GetPlayer()
+    {
+        prefDmg = data.curDmgMax;
+        prefHPMax = data.curHealthMax;
+        prefMgzSize = data.curAmmoMax;
+        prefAmor = data.curAmor;
+        prefRegentSpd = data.curHPRegent;
+        prefReloadSpd = data.curAmmoLoadSpd;
+        prefCoins = data.playerCoin;
 
         amoryDmg = prefDmg;
         amoryHPMax = prefHPMax;
@@ -61,12 +66,7 @@ public class ArmorySC : MonoBehaviour
     void UpdateData_Amory()
     {
         //Call each time buy something
-        PlayerPrefs.SetInt("CurUpgradeDmg", prefDmg);
-        PlayerPrefs.SetInt("CurUpgradeHP", prefHPMax);
-        PlayerPrefs.SetInt("CurUpgradeMgz", prefMgzSize);
-        PlayerPrefs.SetInt("CurArmorLevel", prefAmor);
-        PlayerPrefs.SetInt("CurUpgradeRegen", prefRegentSpd);
-        PlayerPrefs.SetInt("CurUpgradeReloadLv", prefReloadSpd);
+        data.UpdatePlayerArmoryData(prefDmg, prefHPMax, prefMgzSize, prefAmor, prefRegentSpd, prefReloadSpd);        
     }
     void UpdateData_Money() => PlayerPrefs.SetInt("CurUpgradeDmg", prefCoins); //Call each time spent money
     #endregion
@@ -85,7 +85,7 @@ public class ArmorySC : MonoBehaviour
             UpdateUI_Amory();
         }else
         {
-            Debug.Log("Out of Money");
+            menuCtr.OnShowWarningPanel(1, 2);
         }
         SetPrices();
         UpdateUI_Price();
@@ -104,7 +104,7 @@ public class ArmorySC : MonoBehaviour
         }
         else
         {
-            Debug.Log("Out of Money");
+            menuCtr.OnShowWarningPanel(1, 2);
         }
         SetPrices();
         UpdateUI_Price();
@@ -123,7 +123,7 @@ public class ArmorySC : MonoBehaviour
         }
         else
         {
-            Debug.Log("Out of Money");
+            menuCtr.OnShowWarningPanel(1, 2);
         }
         SetPrices();
         UpdateUI_Price();
@@ -142,7 +142,7 @@ public class ArmorySC : MonoBehaviour
         }
         else
         {
-            Debug.Log("Out of Money");
+            menuCtr.OnShowWarningPanel(1, 2);
         }
         SetPrices();
         UpdateUI_Price();
@@ -161,7 +161,7 @@ public class ArmorySC : MonoBehaviour
         }
         else
         {
-            Debug.Log("Out of Money");
+            menuCtr.OnShowWarningPanel(1, 2);
         }
         SetPrices();
         UpdateUI_Price();
@@ -180,7 +180,7 @@ public class ArmorySC : MonoBehaviour
         }
         else
         {
-            Debug.Log("Out of Money");
+            menuCtr.OnShowWarningPanel(1, 2);
         }
         SetPrices();
         UpdateUI_Price();
@@ -211,7 +211,5 @@ public class ArmorySC : MonoBehaviour
     #endregion
 
     public void OnCloseArmory()
-    {
-
-    }
+    {    }
 }

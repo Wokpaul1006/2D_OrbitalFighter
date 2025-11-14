@@ -16,6 +16,7 @@ public class ArcadeGameplaySC : MonoBehaviour
 
     [SerializeField] Text curScoreTxt, curLvTxt, curTimeSurvive, curPosTxt;
     [SerializeField] Text curHPTxt, curAmmoTxt, curAPTxt;
+    [SerializeField] Text debugTxt;
     [SerializeField] Image curHPImg, curAmmoImg, curApImg;
 
     //Variable Declair
@@ -249,4 +250,5 @@ public class ArcadeGameplaySC : MonoBehaviour
                 break;
         }
     }
+    public void PrintDebug(string value) => debugTxt.text = value;
 }

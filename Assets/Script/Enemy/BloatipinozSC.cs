@@ -38,11 +38,13 @@ public class BloatipinozSC : MonoBehaviour
         UpdatePlayerPos();
         MoveToPlayer();
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("ON Hit object");
         if (collision.gameObject.tag == "Player") Exploid();
         else if (collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")
         {
+            Debug.Log("In collide Ammo");
             int tempDmgTake;
             tempDmgTake = hp - player.dmgCur;
             hp = tempDmgTake;

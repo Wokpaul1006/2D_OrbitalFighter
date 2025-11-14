@@ -10,6 +10,7 @@ public class MainMenuSC : MonoBehaviour
     [HideInInspector] DataSC data;
     [HideInInspector] AdsMN adsMN;
     [SerializeField] Text gemTxt, coinTxtl;
+
     public List<GameObject> panels = new List<GameObject>();
     public WarningPanelSC warningPnl;
     private int cointToShow, gemToShow;
@@ -63,6 +64,6 @@ public class MainMenuSC : MonoBehaviour
     #endregion
 
     #region Panel Define
-    
+
     #endregion
 }

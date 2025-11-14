@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerSC : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class PlayerSC : MonoBehaviour
     [HideInInspector] DataSC data;
     [HideInInspector] OmniMN genCtr;
     [HideInInspector] ArcadeGameplaySC arcadeCtr;
-    [HideInInspector] GameplayController stroyCtr;
+    [HideInInspector] GameplayController storyCtr;
+    [HideInInspector] ChallengeSC challengeCtr;
+
 
     #region clarify player stat
     public float moveSpd;
@@ -21,6 +24,8 @@ public class PlayerSC : MonoBehaviour
     public int curWeaponA, curWeaponB;
     public int baseAmmo = 30;
     public int baseHP = 100;
+    public float fireRate = 1f; // seconds between calls
+    private float timer = 0f;
     private Vector3 MousePos;
     #endregion
     void Start()
@@ -32,6 +37,10 @@ public class PlayerSC : MonoBehaviour
                 arcadeCtr = GameObject.Find("OBJ_ArcadeModeMN").GetComponent<ArcadeGameplaySC>();
                 break;
             case 2:
+                challengeCtr = GameObject.Find("CAN_Challenge").GetComponent<ChallengeSC>();
+                break;
+            case 3:
+                storyCtr = GameObject.Find("CAN_Story").GetComponent<GameplayController>();
                 break;
         }
         GetPlayerStatforStart();
@@ -51,7 +60,7 @@ public class PlayerSC : MonoBehaviour
         {
             //Keyboard control
             OnMoveByKey();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 OnFireNormalByKey();
             }
@@ -200,45 +209,62 @@ public class PlayerSC : MonoBehaviour
             {
                 if (isReload == false)
                 {
-                    InvokeRepeating(nameof(OnFire), 0f, 1f);
-                    genCtr.PlayDefault();
-                    if (ammoCur <= 0)
+                    timer += Time.deltaTime;
+                    if (timer >= fireRate)
                     {
-                        isReload = true;
-                        arcadeCtr.DecreaseAmmo();
-                        StartCoroutine(ReloadAmmo());
-                    }
-                    else if (ammoCur >= data.curAmmoMax)
-                    {
-                        arcadeCtr.DecreaseAmmo();
-                        StopCoroutine(ReloadAmmo());
+                        arcadeCtr.PrintDebug("in fire bullet");
+                        Instantiate(bullet, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
+                        ammoCur--;
+                        genCtr.PlayShootSound();
+                        if (ammoCur <= 0)
+                        {
+                            isReload = true;
+                            arcadeCtr.DecreaseAmmo();
+                            StartCoroutine(ReloadAmmo());
+                        }
+                        else if (ammoCur >= data.curAmmoMax)
+                        {
+                            arcadeCtr.DecreaseAmmo();
+                            StopCoroutine(ReloadAmmo());
+                        }
+                        timer = 0;
                     }
                 }
             }
+            else if(touch.phase == TouchPhase.Ended)
+            {
+                                arcadeCtr.PrintDebug("in non fire");
+                timer = 0;
+            } 
         }
     }
 
     private void OnFire()
     {
-        Instantiate(bullet, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
-        ammoCur--;
+        
     }
     private void OnFireNormalByKey()
     {
         if (isReload == false)
         {
-            Instantiate(bullet, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
-            ammoCur -= 1;
-            if (ammoCur <= 0)
+            timer += Time.deltaTime;
+            if (timer >= fireRate)
             {
-                isReload = true;
-                arcadeCtr.DecreaseAmmo();
-                StartCoroutine(ReloadAmmo());
-            }
-            else if (ammoCur >= data.curAmmoMax)
-            {
-                arcadeCtr.DecreaseAmmo();
-                StopCoroutine(ReloadAmmo());
+                Instantiate(bullet, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
+                ammoCur--;
+                genCtr.PlayShootSound();
+                if (ammoCur <= 0)
+                {
+                    isReload = true;
+                    arcadeCtr.DecreaseAmmo();
+                    StartCoroutine(ReloadAmmo());
+                }
+                else if (ammoCur >= data.curAmmoMax)
+                {
+                    arcadeCtr.DecreaseAmmo();
+                    StopCoroutine(ReloadAmmo());
+                }
+                timer = 0;
             }
         }
     }

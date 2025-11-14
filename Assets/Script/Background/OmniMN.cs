@@ -116,7 +116,7 @@ public class OmniMN : Singleton<OmniMN>
     {
         sfxToPlay.OnSwordSlash();
     }
-    public void PlayDefault()
+    public void PlayShootSound()
     {
         sfxToPlay.OnDefaultShoot();
     }

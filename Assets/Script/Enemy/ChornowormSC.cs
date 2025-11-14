@@ -39,7 +39,7 @@ public class ChornowormSC : MonoBehaviour
     void Update()
     {
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player") Exploid();
         else if (collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")

@@ -43,7 +43,7 @@ public class DataSC : MonoBehaviour
         //Player information
         PlayerPrefs.SetString("PlayerName", nameFistPlay);
         PlayerPrefs.SetInt("Highscore", 0); //For total overview, leaderboard
-        PlayerPrefs.SetInt("Totalscore", 1000); //Actual player in-game currency
+        PlayerPrefs.SetInt("Totalscore", 0); //Actual player in-game currency
         PlayerPrefs.SetInt("TotalGems", 0); //Player's PIA currency
         PlayerPrefs.SetInt("CurWeaponSlot_A", 0); //index of weapon order in list. 0 is non
         PlayerPrefs.SetInt("CurWeaponSlot_B", 0); //index of weapon order in list. 0 is non
@@ -82,9 +82,6 @@ public class DataSC : MonoBehaviour
         curWeaponSelected_SlotA = PlayerPrefs.GetInt("CurWeaponSlot_A");
         curWeaponSelected_SlotB = PlayerPrefs.GetInt("CurWeaponSlot_B");
         curAbilitySelected = PlayerPrefs.GetInt("CurAblility");
-
-        print("curWeaponSelected_SlotA = " + curWeaponSelected_SlotA);
-        print("curWeaponSelected_SlotB = " + curWeaponSelected_SlotB);
 
         curDmgMax = PlayerPrefs.GetInt("CurUpgradeDmg");
         curHealthMax = PlayerPrefs.GetInt("CurUpgradeHP");
@@ -209,11 +206,29 @@ public class DataSC : MonoBehaviour
                 PlayerPrefs.SetInt("PatrolDailyStreak", value);
                 pDailyStreak = value;
                 break;
-            //case 2:
-            //    PlayerPrefs.SetInt("PatrolMonthlyStreak", value);
-            //    pMonthlyStreak = value;
-            //    break;
         }
     }
+
+    public void UpdatePlayerArmoryData(int dmg, int hpMax, int mgzSize, int armor, int regentSpd, int reloadSpd)
+    {
+        PlayerPrefs.SetInt("CurUpgradeDmg", dmg);
+        PlayerPrefs.SetInt("CurUpgradeHP", hpMax);
+        PlayerPrefs.SetInt("CurUpgradeMgz", mgzSize);
+        PlayerPrefs.SetInt("CurArmorLevel", armor);
+        PlayerPrefs.SetInt("CurUpgradeRegen", regentSpd);
+        PlayerPrefs.SetInt("CurUpgradeReloadLv", reloadSpd);
+
+        curDmgMax = PlayerPrefs.GetInt("CurUpgradeDmg");
+        curHealthMax = PlayerPrefs.GetInt("CurUpgradeHP");
+        curAmmoMax = PlayerPrefs.GetInt("CurUpgradeMgz");
+        curAmor = PlayerPrefs.GetInt("CurArmorLevel");
+        curHPRegent = PlayerPrefs.GetInt("CurUpgradeRegen");
+        curAmmoLoadSpd = PlayerPrefs.GetInt("CurUpgradeReloadLv");
+    }
     #endregion
+
+    private void OnUpdateSystem()
+    {
+           
+    }
 }

@@ -31,7 +31,7 @@ public class PBullet : MonoBehaviour
     private void Update() => MoveLinear();
     private void MoveLinear() => transform.position += Vector3.up * Time.deltaTime * movespeed;
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemies" || collision.gameObject.tag == "EAmmo") OnHitTarget();
     }
