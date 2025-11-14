@@ -269,8 +269,8 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: D:/Projects/user.keystore
-  AndroidKeyaliasName: sdskeystore
+  AndroidKeystoreName: C:/Project/userKeystoreTestbuild.keystore
+  AndroidKeyaliasName: sdsoftkeytest
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
