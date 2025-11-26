@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MaciliozSC : MonoBehaviour
 {  
@@ -10,13 +11,14 @@ public class MaciliozSC : MonoBehaviour
     [HideInInspector] GameplayController storyCtr;
     [SerializeField] EBullet savita;
     [HideInInspector] PlayerSC player;
+    [SerializeField] Image healthBar;
 
     //Unit Prperties
     private float moveSpd;
     private float atkDmg;
     private float atkSpd;
     private float aoedmg;
-    private int hp;
+    private float curHP, maxHP;
     private int selfScore;
     void Start()
     {
@@ -44,12 +46,14 @@ public class MaciliozSC : MonoBehaviour
         if (collision.gameObject.tag == "Player") Exploid();
         else if (collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")
         {
-            int tempDmgTake;
-            tempDmgTake = hp - player.dmgCur;
-            hp = tempDmgTake;
-            if (hp <= 0)
+            float tempDmgTake;
+            tempDmgTake = curHP - (float)player.dmgCur;
+            curHP = tempDmgTake;
+            UpdateHealthBar(curHP);
+            if (curHP <= 0)
             {
                 arcadeCtr.IncreaseScore(selfScore);
+                arcadeCtr.UpdadeEnemyKill();
                 Exploid();
             }
         }
@@ -60,7 +64,8 @@ public class MaciliozSC : MonoBehaviour
         atkDmg = 1;
         atkSpd = 2;
         aoedmg = 0;
-        hp = 2;
+        curHP = 2;
+        maxHP = curHP;
         selfScore = 2;
     }
     void Exploid()
@@ -73,5 +78,9 @@ public class MaciliozSC : MonoBehaviour
         yield return new WaitForSeconds(15);
         Destroy(gameObject);
         StartCoroutine(CountToDead());
+    }
+    private void UpdateHealthBar(float hpBeDecrease)
+    {
+        healthBar.fillAmount = hpBeDecrease / maxHP;
     }
 }

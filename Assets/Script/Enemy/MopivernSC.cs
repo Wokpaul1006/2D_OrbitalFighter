@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MopivernSC : MonoBehaviour
 {
@@ -10,13 +11,14 @@ public class MopivernSC : MonoBehaviour
     [HideInInspector] GameplayController storyCtr;
     [SerializeField] EBullet thorn;
     [HideInInspector] PlayerSC player;
+    [SerializeField] Image healthBar;
 
     //Unit Prperties
     private float moveSpd;
     private float atkDmg;
     private float atkSpd;
     private float aoedmg;
-    private int hp;
+    private float curHP, maxHP;
     private int selfScore;
     void Start()
     {
@@ -44,12 +46,14 @@ public class MopivernSC : MonoBehaviour
         if (collision.gameObject.tag == "Player") Exploid();
         else if (collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")
         {
-            int tempDmgTake;
-            tempDmgTake = hp - player.dmgCur;
-            hp = tempDmgTake;
-            if (hp <= 0)
+            float tempDmgTake;
+            tempDmgTake = curHP - (float)player.dmgCur;
+            curHP = tempDmgTake;
+            UpdateHealthBar(curHP);
+            if (curHP <= 0)
             {
                 arcadeCtr.IncreaseScore(selfScore);
+                arcadeCtr.UpdadeEnemyKill();
                 Exploid();
             }
         }
@@ -60,7 +64,8 @@ public class MopivernSC : MonoBehaviour
         atkDmg = 6f;
         atkSpd = 1;
         aoedmg = 0;
-        hp = 3;
+        curHP = 3;
+        maxHP = curHP;
         selfScore = 3;
     }
     void Exploid()
@@ -82,4 +87,8 @@ public class MopivernSC : MonoBehaviour
         StartCoroutine(ReleaseThorn());
     }
     private void MoveLinear() => transform.position += Vector3.down * Time.deltaTime * moveSpd;
+    private void UpdateHealthBar(float hpBeDecrease)
+    {
+        healthBar.fillAmount = hpBeDecrease / maxHP;
+    }
 }

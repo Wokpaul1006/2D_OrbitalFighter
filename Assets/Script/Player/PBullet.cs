@@ -9,7 +9,7 @@ public class PBullet : MonoBehaviour
     [HideInInspector] ArcadeGameplaySC arcadeCtr;
     [HideInInspector] OmniMN genCtr;
     [HideInInspector] PlayerSC player;
-    private float movespeed = 5f;
+    private float movespeed = 8f;
     private int gameMode;
     private float dmg;
     private void Start()

@@ -9,8 +9,8 @@ public class Broodlings : EBullet
     {
         moveSpd = 3f;
         damage = 10;
+        base.Start();
         player = GameObject.Find("Player(Clone)").GetComponent<PlayerSC>();
-        StartCoroutine(selfDestruct());
     }
     private void Update()
     {
@@ -21,17 +21,13 @@ public class Broodlings : EBullet
         if(collision.gameObject.tag == "Player")
         {
             player.OnTakeDamage(damage);
+            arcadeCtr.UpdadeEnemyKill();
             Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")
         {
+            arcadeCtr.UpdadeEnemyKill();
             Destroy(gameObject);
         }
-    }
-    private IEnumerator selfDestruct()
-    {
-        yield return new WaitForSeconds(moveSpd * 1.5f);
-        Destroy(gameObject);
-        StartCoroutine(selfDestruct());
     }
 }

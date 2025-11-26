@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EBullet : MonoBehaviour
 {
-    [HideInInspector] OmniMN genCtr;
-    [HideInInspector] ArcadeGameplaySC arcadeCtr;
-    [HideInInspector] GameplayController storyCtr;
+    [HideInInspector] internal OmniMN genCtr;
+    [HideInInspector] internal ArcadeGameplaySC arcadeCtr;
+    [HideInInspector] internal GameplayController storyCtr;
     private Vector3 targetPos;
 
     internal int damage;
     internal float moveSpd, tempXDiagonal, tempYDiagonal;
-    private void Start()
+    protected virtual void Start()
     {
         GetComponent<Rigidbody2D>();
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
@@ -23,7 +23,7 @@ public class EBullet : MonoBehaviour
             case 2:
                 break;
         }
-        StartCoroutine(CountToDead());
+        Invoke(nameof(SelfDestruct), 10f);
     }
     void Update()
     {    }
@@ -61,10 +61,8 @@ public class EBullet : MonoBehaviour
         Vector3 direction = (targetPos - transform.position).normalized; // direction to player
         gameObject.transform.position += direction * moveSpd * Time.deltaTime;
     }
-    internal IEnumerator CountToDead()
+    internal void SelfDestruct()
     {
-        yield return new WaitForSeconds(10f);
         Destroy(gameObject);
-        StartCoroutine(CountToDead());
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="Assets\Script\Background\SoundMN.cs" />
     <Compile Include="Assets\Script\Player\GuidedMissleSC.cs" />
     <Compile Include="Assets\Script\GameplaySC\ArcadeGameplaySC.cs" />
+    <Compile Include="Assets\Script\WarningPanelSC.cs" />
     <Compile Include="Assets\Script\UIs\OptionSC.cs" />
     <Compile Include="Assets\Script\GameplaySC\GameplayController.cs" />
     <Compile Include="Assets\Script\Player\PBullet.cs" />
@@ -111,7 +112,6 @@
     <Compile Include="Assets\Script\Enemy\MaciliozSC.cs" />
     <Compile Include="Assets\Script\Enemy\BroodpinosSC.cs" />
     <Compile Include="Assets\Script\UIs\PauseSC.cs" />
-    <Compile Include="Assets\WarningPanelSC.cs" />
     <Compile Include="Assets\Script\Background\ThemeMN.cs" />
     <Compile Include="Assets\Script\Ads\AdConfig.cs" />
     <Compile Include="Assets\Script\UIs\ShopSC.cs" />

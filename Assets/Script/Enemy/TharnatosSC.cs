@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TharnatosSC : MonoBehaviour
 {
@@ -10,13 +11,13 @@ public class TharnatosSC : MonoBehaviour
     [HideInInspector] GameplayController storyCtr;
     [SerializeField] SalvitaSC savita;
     [HideInInspector] PlayerSC player;
-
+    [SerializeField] Image healthBar;
     //Unit Prperties
     private float moveSpd;
     private float atkDmg;
     private float atkSpd;
     private float aoedmg;
-    private int hp;
+    private float curHP, maxHP;
     private int selfScore;
     private int randAxis; //0 = Horizontal Left, 1 = horizontal right, 2 = vertical down, 3 = vertical up
     void Start()
@@ -60,12 +61,14 @@ public class TharnatosSC : MonoBehaviour
         if (collision.gameObject.tag == "Player") Exploid();
         else if (collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")
         {
-            int tempDmgTake;
-            tempDmgTake = hp - player.dmgCur;
-            hp = tempDmgTake;
-            if (hp <= 0)
+            float tempDmgTake;
+            tempDmgTake = curHP - (float)player.dmgCur;
+            curHP = tempDmgTake;
+            UpdateHealthBar(curHP);
+            if (curHP <= 0)
             {
                 arcadeCtr.IncreaseScore(selfScore);
+                arcadeCtr.UpdadeEnemyKill();
                 Exploid();
             }
         }
@@ -76,7 +79,8 @@ public class TharnatosSC : MonoBehaviour
         atkDmg = 1;
         atkSpd = 0.5f;
         aoedmg = 0;
-        hp = 2;
+        curHP = 2;
+        maxHP = curHP;
         selfScore = 2;
     }
     void Exploid()
@@ -102,4 +106,8 @@ public class TharnatosSC : MonoBehaviour
     void MOveRight() => gameObject.transform.position = Vector3.right * moveSpd * Time.deltaTime;
     void MoveLeft() => gameObject.transform.position = Vector3.left * moveSpd * Time.deltaTime;
     #endregion
+    private void UpdateHealthBar(float hpBeDecrease)
+    {
+        healthBar.fillAmount = hpBeDecrease / maxHP;
+    }
 }

@@ -24,7 +24,7 @@ public class PlayerSC : MonoBehaviour
     public int curWeaponA, curWeaponB;
     public int baseAmmo = 30;
     public int baseHP = 100;
-    public float fireRate = 1f; // seconds between calls
+    public float fireRate = 0.1f; // seconds between calls
     private float timer = 0f;
     private Vector3 MousePos;
     #endregion
@@ -212,7 +212,6 @@ public class PlayerSC : MonoBehaviour
                     timer += Time.deltaTime;
                     if (timer >= fireRate)
                     {
-                        arcadeCtr.PrintDebug("in fire bullet");
                         Instantiate(bullet, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
                         ammoCur--;
                         genCtr.PlayShootSound();
@@ -233,7 +232,6 @@ public class PlayerSC : MonoBehaviour
             }
             else if(touch.phase == TouchPhase.Ended)
             {
-                                arcadeCtr.PrintDebug("in non fire");
                 timer = 0;
             } 
         }

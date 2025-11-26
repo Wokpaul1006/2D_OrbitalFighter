@@ -17,10 +17,12 @@ public class ArcadeGameplaySC : MonoBehaviour
     [SerializeField] Text curScoreTxt, curLvTxt, curTimeSurvive, curPosTxt;
     [SerializeField] Text curHPTxt, curAmmoTxt, curAPTxt;
     [SerializeField] Text debugTxt;
+    [SerializeField] Text enemyKilledTxt;
     [SerializeField] Image curHPImg, curAmmoImg, curApImg;
 
     //Variable Declair
     public int arcadeLv, arcadeScore, arcadeTimeSurvive, arcadeLife, arcadeHP, arcadeAP, arcadeAmmo; //Arcade Attribute
+    public int killCount;
     private int pDmg, pHPMax, pHPCur, pAmor, pRegent, pReload, pAmmoMax; //Data load attribute
     private int pWeaponA, pWeaponB, pAbility;
     private int targetLv;
@@ -69,6 +71,9 @@ public class ArcadeGameplaySC : MonoBehaviour
 
         OnInstiatieWeapon_SlotA(pWeaponA);
         OnInstiatieWeapon_SlotB(pWeaponB);
+
+        killCount = 0;
+        UpdadeEnemyKill();
     }
     public void UpdatePlayerStat(int hp, int ap, int ammo, int score, int lv)
     {
@@ -251,4 +256,9 @@ public class ArcadeGameplaySC : MonoBehaviour
         }
     }
     public void PrintDebug(string value) => debugTxt.text = value;
+    public void UpdadeEnemyKill()
+    {
+        killCount++;
+        enemyKilledTxt.text = killCount.ToString();
+    }
 }
