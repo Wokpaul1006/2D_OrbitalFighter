@@ -8,7 +8,6 @@ public class MainMenuSC : MonoBehaviour
 {
     [HideInInspector] OmniMN genCtr;
     [HideInInspector] DataSC data;
-    [HideInInspector] AdsMN adsMN;
     [SerializeField] Text gemTxt, coinTxtl;
 
     public List<GameObject> panels = new List<GameObject>();
@@ -18,7 +17,6 @@ public class MainMenuSC : MonoBehaviour
     {
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         data = GameObject.Find("OBJ_DataCtr").GetComponent<DataSC>();
-        adsMN = GameObject.Find("AdsMN").GetComponent<AdsMN>();
         warningPnl = GameObject.Find("PNL_WarningPnl").GetComponent<WarningPanelSC>();
         LoadUserInRuntime();
         ClearAllPanels();
