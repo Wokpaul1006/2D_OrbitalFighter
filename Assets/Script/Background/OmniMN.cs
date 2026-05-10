@@ -40,22 +40,19 @@ public class OmniMN : Singleton<OmniMN>
         switch (sceneOder)
         {
             case 0: //To Mainmenu
-                SceneManager.LoadScene("MainScene");
+                SceneManager.LoadScene("2.CentralScene");
                 break;
             case 1:
-                SceneManager.LoadScene("ArenaScene");
+                SceneManager.LoadScene("3.AmouryScene");
                 gameMode = 1; //Arcade
                 break;
             case 2:
-                SceneManager.LoadScene("StoryScene");
+                SceneManager.LoadScene("4.PrivateDormScene");
                 gameMode = 2; //Story
                 break;
             case 3:
-                SceneManager.LoadScene("PvPScene");
+                SceneManager.LoadScene("5.MapScene");
                 gameMode = 3; //PvP
-                break;
-            case 4:
-                SceneManager.LoadScene("4_PlaygroundPvP");
                 break;
             case 5:
                 //Send request to server that player Quit game

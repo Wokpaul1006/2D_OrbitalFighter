@@ -43,11 +43,22 @@ public class MainMenuSC : MonoBehaviour
         OnSetUI();
     }
     #region Switch Scene & Panels
-    public void OnToArena() => genCtr.OnChangeScene(1);
-    public void OnToStorymode() =>  genCtr.OnChangeScene(2);
-    public void OnToPvP() => genCtr.OnChangeScene(3);
-    public void OnToMOBA() => genCtr.OnChangeScene(4);
-    public void OnExit() => genCtr.OnChangeScene(5);
+    public void ToAmoury()
+    {
+        genCtr.OnChangeScene(1);
+    }
+    public void ToCommandeck()
+    {
+        genCtr.OnChangeScene(3);
+    }
+    public void ToFlightDeck()
+    {
+        genCtr.OnChangeScene(2);
+    }
+    public void ToCentralScene()
+    {
+        genCtr.OnChangeScene(0);
+    }
     public void OnToOption() => genCtr.OnShowOption();
     public void OnUserInfor() => genCtr.OnShowInforPanel();
     public void OnShowWarningPanel(int callOrder, int contentOrder)
@@ -64,4 +75,5 @@ public class MainMenuSC : MonoBehaviour
     #region Panel Define
 
     #endregion
+    
 }
