@@ -17,6 +17,7 @@ public class DataSC : MonoBehaviour
     [HideInInspector] private int curThemeState, curSFXState;
     [HideInInspector] OptionSC option;
 
+    public bool isFirstPlay;
     public int pAllowClaimDaily;
     public int pDailyStreak;
     public string pLastDailyClaim;
@@ -24,11 +25,25 @@ public class DataSC : MonoBehaviour
     {
         DontDestroyOnLoad(this);
         option = GameObject.Find("PNL_Option").GetComponent<OptionSC>();
+        SettingStart();
     }
     private void Start()
     {    }
     private void Update()
     {    }
+    private void SettingStart()
+    {
+        if (CheckFirstPlay() == true)
+        {
+            SetNewPlayer();
+        }
+        else if (CheckFirstPlay() == false)
+        {
+            LoadOldPlayer();
+        }
+        ///infor = GameObject.Find("GenMN").GetComponent<PlayerInforSC>();
+    }
+
     public void SetNewPlayer()
     {
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
@@ -41,7 +56,8 @@ public class DataSC : MonoBehaviour
         }
 
         //Player information
-        PlayerPrefs.SetString("PlayerName", nameFistPlay);
+        Debug.Log("in new layer");
+        PlayerPrefs.SetInt("HasPlayed", 0);
         PlayerPrefs.SetInt("Highscore", 0); //For total overview, leaderboard
         PlayerPrefs.SetInt("Totalscore", 0); //Actual player in-game currency
         PlayerPrefs.SetInt("TotalGems", 0); //Player's PIA currency
@@ -72,7 +88,7 @@ public class DataSC : MonoBehaviour
 
         Invoke("LoadOldPlayer", 3f); //De tam thoi
     }
-    public void GetOldPlayer()
+    public void LoadOldPlayer()
     {
         //This function load player information if there are not FIRST PLAY
         playerName = PlayerPrefs.GetString("PlayerName");
@@ -93,11 +109,8 @@ public class DataSC : MonoBehaviour
 
         //Patrol Reward
         pLastDailyClaim = PlayerPrefs.GetString("LastPatrolDailyTime");
-        //pLastMonthlyClaim = PlayerPrefs.GetString("LastPatrolMonthlyTime");
         pAllowClaimDaily = PlayerPrefs.GetInt("AllowClaimDaily");
-        //pAllowClaimMonthly = PlayerPrefs.GetInt("AllowClaimMonthly");
         pDailyStreak = PlayerPrefs.GetInt("PatrolDailyStreak");
-        //pMonthlyStreak = PlayerPrefs.GetInt("PatrolMonthlyStreak");
 
         CheckSoundState();
     }
@@ -128,6 +141,10 @@ public class DataSC : MonoBehaviour
     public void DeletePlayer() { PlayerPrefs.DeleteAll(); }
 
     #region Data Update
+    public void UpdateFirsrtPlay()
+    {
+        PlayerPrefs.SetInt("HasPlayed", 1);
+    }
     public void UpdatePName(string name)
     {
         PlayerPrefs.SetString("PlayerName", name);
@@ -138,16 +155,6 @@ public class DataSC : MonoBehaviour
         PlayerPrefs.SetInt("Highscore", highScore);
         playerHighscore = PlayerPrefs.GetInt("Highscore");
     }
-    //public void UpdateHighLv(int highLv)
-    //{
-    //    PlayerPrefs.SetInt("PHighestLevel", highLv);
-    //    p = PlayerPrefs.GetInt("PHighestLevel");
-    //}
-    //public void UpdateStoryLv(int curStoryLv)
-    //{
-    //    PlayerPrefs.SetInt("CurrentStoryLevel", curStoryLv);
-    //    pStoryLvl = PlayerPrefs.GetInt("CurrentStoryLevel");
-    //}
     public void UpdateTotalScore(int currency)
     {
         PlayerPrefs.SetInt("Totalscore", currency);
@@ -230,5 +237,10 @@ public class DataSC : MonoBehaviour
     private void OnUpdateSystem()
     {
            
+    }
+    private bool CheckFirstPlay()
+    {
+        if (PlayerPrefs.GetInt("HasPlayed") == 0) return isFirstPlay = true;
+        else return false;
     }
 }

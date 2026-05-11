@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2143085181944934116}
   - component: {fileID: -7204932846541663566}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Ship-08
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f41c2d04e2227534d82ead1e90d6ff3e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 43112c48ff1b5f6499fd8ed13813f5aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,7 +123,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 3.16}
+    oldSize: {x: 5.12, y: 3.53}
     newSize: {x: 0.2, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -173,24 +173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sBullet: {fileID: -2494175297180165126, guid: 425cbce59f7c0374e9883c39c59a6a0c, type: 3}
   bullet: {fileID: 5283640479704629615, guid: 2db67bd3deef7b24db13a62520883a3c, type: 3}
-  weaponB:
-  - {fileID: 8179552225775285051, guid: 26bf46440cc43884296a069c211d3f0d, type: 3}
-  - {fileID: 2144971107861462497, guid: d8ed441963803cb45bcb79cc4e91658e, type: 3}
-  - {fileID: 3707709589348050638, guid: c14546180a4439946878e55dbe153f93, type: 3}
-  - {fileID: 121407721798244189, guid: 048f4dde0379f694c903360d07e5346b, type: 3}
-  - {fileID: 6776504412068690985, guid: db65ac07a091231439471bbfc74f8331, type: 3}
-  - {fileID: 5419602671929013983, guid: 5a2654bd6787fce47a3d993e446d0e7e, type: 3}
-  - {fileID: 4548111680953207049, guid: 4223a20c20ded1d438d7855c2694f6df, type: 3}
-  - {fileID: 4329586990083890024, guid: 89d8eff025ef8cd479c7d8b71c55925f, type: 3}
-  weaponA:
-  - {fileID: 6000288128629315084, guid: ab44866da70a56b43a27de188c9d916a, type: 3}
-  - {fileID: 2144971107861462497, guid: d8ed441963803cb45bcb79cc4e91658e, type: 3}
-  - {fileID: 3707709589348050638, guid: c14546180a4439946878e55dbe153f93, type: 3}
-  - {fileID: 5382597313949358, guid: 3248b6272bf57a542b3d9e03f5aa1017, type: 3}
-  - {fileID: 5118539963845090744, guid: df6e1c0044aefb243ac428b6f2d2b6e2, type: 3}
-  - {fileID: 7567532695215424010, guid: 1092981b377276342bd92624b45b3b18, type: 3}
-  - {fileID: 4548111680953207049, guid: 4223a20c20ded1d438d7855c2694f6df, type: 3}
-  - {fileID: 4329586990083890024, guid: 89d8eff025ef8cd479c7d8b71c55925f, type: 3}
   moveSpd: 0
   isReload: 0
   dmgCur: 0
@@ -205,3 +187,4 @@ MonoBehaviour:
   curWeaponB: 0
   baseAmmo: 30
   baseHP: 100
+  fireRate: 0.1

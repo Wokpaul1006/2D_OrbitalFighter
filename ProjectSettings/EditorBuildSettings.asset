@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/3.AmouryScene.unity
     guid: 1e97caaca68aac54d9b76da1919f3883
+  - enabled: 1
+    path: Assets/6.SetupPlayer.unity
+    guid: f6be97e7cc73d3741a3e93004b3a35c4
   m_configObjects: {}

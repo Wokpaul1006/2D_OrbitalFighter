@@ -55,6 +55,9 @@ public class OmniMN : Singleton<OmniMN>
                 gameMode = 3; //PvP
                 break;
             case 5:
+                SceneManager.LoadScene("6.SetupPlayer");
+                break;
+            case 6:
                 //Send request to server that player Quit game
                 Application.Quit();
                 break;
@@ -89,7 +92,7 @@ public class OmniMN : Singleton<OmniMN>
         else if (hasPlayed == 1) LoadOldPlayer(); //Case of not First Play
     }
     private void SetNewPlayer() => dataControl.SetNewPlayer();
-    public void LoadOldPlayer() => dataControl.GetOldPlayer();
+    public void LoadOldPlayer() => dataControl.LoadOldPlayer();
     #endregion
 
     #region Handle UIs revealations

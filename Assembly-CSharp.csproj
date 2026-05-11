@@ -88,6 +88,7 @@
     <Compile Include="Assets\Script\UIs\Achievements.cs" />
     <Compile Include="Assets\Script\UIs\PatrolEarnSC.cs" />
     <Compile Include="Assets\Script\Background\OmniMN.cs" />
+    <Compile Include="Assets\Script\CharSetMN.cs" />
     <Compile Include="Assets\Script\Background\DialougeSC.cs" />
     <Compile Include="Assets\Script\Enemy\ArachilingsSC.cs" />
     <Compile Include="Assets\Script\Player\SecondaryWeapSC.cs" />
