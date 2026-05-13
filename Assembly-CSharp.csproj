@@ -68,6 +68,7 @@
     <Compile Include="Assets\Script\Player\PlayerSC.cs" />
     <Compile Include="Assets\Script\UIs\MainMenuSC.cs" />
     <Compile Include="Assets\Script\UIs\MailerSC.cs" />
+    <Compile Include="Assets\Script\SaveSystem.cs" />
     <Compile Include="Assets\Script\Background\SoundMN.cs" />
     <Compile Include="Assets\Script\Player\GuidedMissleSC.cs" />
     <Compile Include="Assets\Script\GameplaySC\ArcadeGameplaySC.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Script\Enemy\ThornSC.cs" />
     <Compile Include="Assets\Script\Enemy\Broodlings.cs" />
     <Compile Include="Assets\Script\GameplaySC\PvPGameplaySC.cs" />
+    <Compile Include="Assets\Script\PlayerData.cs" />
     <Compile Include="Assets\Script\UIs\CreditsSC.cs" />
     <Compile Include="Assets\Script\Background\DataSC.cs" />
     <Compile Include="Assets\Script\Enemy\SalvitaSC.cs" />

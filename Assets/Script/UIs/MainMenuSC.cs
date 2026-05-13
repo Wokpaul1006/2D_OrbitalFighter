@@ -17,7 +17,7 @@ public class MainMenuSC : MonoBehaviour
     {
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         data = GameObject.Find("OBJ_DataCtr").GetComponent<DataSC>();
-        //warningPnl = GameObject.Find("PNL_WarningPnl").GetComponent<WarningPanelSC>();
+        warningPnl = GameObject.Find("PNL_WarningPnl").GetComponent<WarningPanelSC>();
         LoadUserInRuntime();
         ClearAllPanels();
     }

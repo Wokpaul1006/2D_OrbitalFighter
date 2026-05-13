@@ -22,7 +22,7 @@ public class ArmorySC : MonoBehaviour
     {
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         data = GameObject.Find("OBJ_DataCtr").GetComponent<DataSC>();
-        menuCtr = GameObject.Find("Main_MN").GetComponent<MainMenuSC>();
+
     }
     void Start()
     {

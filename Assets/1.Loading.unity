@@ -3585,6 +3585,7 @@ MonoBehaviour:
   curWeaponSelected_SlotA: 0
   curWeaponSelected_SlotB: 0
   curAbilitySelected: 0
+  isFirstPlay: 0
   pAllowClaimDaily: 0
   pDailyStreak: 0
   pLastDailyClaim: 
@@ -8824,6 +8825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 940137525}
   omniMN: {fileID: 1247133239}
+  dataSC: {fileID: 0}
   target: 1
 --- !u!1 &1280458179
 GameObject:
@@ -9535,7 +9537,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bc6e8a8cdcace7d47a0af6716afc9a45, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2fa0e4054b293a643aa52b37a162dbbe, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -10115,6 +10117,7 @@ MonoBehaviour:
   curWeaponSelected_SlotA: 0
   curWeaponSelected_SlotB: 0
   curAbilitySelected: 0
+  isFirstPlay: 0
   pAllowClaimDaily: 0
   pDailyStreak: 0
   pLastDailyClaim: 
@@ -10513,6 +10516,7 @@ MonoBehaviour:
   curWeaponSelected_SlotA: 0
   curWeaponSelected_SlotB: 0
   curAbilitySelected: 0
+  isFirstPlay: 0
   pAllowClaimDaily: 0
   pDailyStreak: 0
   pLastDailyClaim: 

@@ -15,6 +15,7 @@ public class DataSC : MonoBehaviour
     [HideInInspector] public int curWeaponSelected_SlotA, curWeaponSelected_SlotB;
     [HideInInspector] public int curAbilitySelected;
     [HideInInspector] private int curThemeState, curSFXState;
+    [HideInInspector] private int playerClass;
     [HideInInspector] OptionSC option;
 
     public bool isFirstPlay;
@@ -24,6 +25,7 @@ public class DataSC : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
+        //PlayerPrefs.DeleteAll();
         option = GameObject.Find("PNL_Option").GetComponent<OptionSC>();
         SettingStart();
     }
@@ -66,6 +68,7 @@ public class DataSC : MonoBehaviour
         PlayerPrefs.SetInt("CurAblility", 0); //index of ability order in list. 0 is non
 
         //Upgrade able section
+        PlayerPrefs.SetInt("Class", 1000);
         PlayerPrefs.SetInt("CurUpgradeDmg", 1); //Damage upgrade
         PlayerPrefs.SetInt("CurUpgradeHP", 1); //Max HP upgrade
         PlayerPrefs.SetInt("CurUpgradeMgz", 1); //Max Ammo magazine upgrade
@@ -95,6 +98,7 @@ public class DataSC : MonoBehaviour
         playerHighscore = PlayerPrefs.GetInt("Highscore");
         playerCoin = PlayerPrefs.GetInt("Totalscore");
         playerGems = PlayerPrefs.GetInt("TotalGems");
+        playerClass = PlayerPrefs.GetInt("Class");
         curWeaponSelected_SlotA = PlayerPrefs.GetInt("CurWeaponSlot_A");
         curWeaponSelected_SlotB = PlayerPrefs.GetInt("CurWeaponSlot_B");
         curAbilitySelected = PlayerPrefs.GetInt("CurAblility");
@@ -174,6 +178,11 @@ public class DataSC : MonoBehaviour
     {
         PlayerPrefs.SetInt("soundState", thameState);
         curThemeState = PlayerPrefs.GetInt("soundState");
+    }
+    public void UpdatePlayerClass(int value)
+    {
+        PlayerPrefs.SetInt("Class", value);
+        playerClass = PlayerPrefs.GetInt("Class");
     }
     public void UpdateAbility(int abilityOder)
     {
