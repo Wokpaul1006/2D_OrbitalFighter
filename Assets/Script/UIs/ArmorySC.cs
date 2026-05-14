@@ -22,13 +22,8 @@ public class ArmorySC : MonoBehaviour
     {
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         data = GameObject.Find("OBJ_DataCtr").GetComponent<DataSC>();
-
     }
     void Start()
-    {
-        GetPlayer();
-    }
-    void OnEnable()
     {
         GetPlayer();
     }
@@ -210,6 +205,14 @@ public class ArmorySC : MonoBehaviour
     }
     #endregion
 
-    public void OnCloseArmory()
-    {    }
+    public void OnBackCommand()
+    {
+        UpdateData_Amory();
+        genCtr.OnChangeScene(1);
+    }
+    public void OnToGame()
+    {
+        UpdateData_Amory();
+        genCtr.OnChangeScene(3);
+    }
 }
