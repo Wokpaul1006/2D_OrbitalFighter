@@ -8,23 +8,22 @@ public class MainMenuSC : MonoBehaviour
 {
     [HideInInspector] OmniMN genCtr;
     [HideInInspector] DataSC data;
-    [SerializeField] Text gemTxt, coinTxtl;
+    [SerializeField] Text gemTxt, coinTxtl, curLevel;
 
     public List<GameObject> panels = new List<GameObject>();
-    public WarningPanelSC warningPnl;
     private int cointToShow, gemToShow;
     private void Start()
     {
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         data = GameObject.Find("OBJ_DataCtr").GetComponent<DataSC>();
-        warningPnl = GameObject.Find("PNL_WarningPnl").GetComponent<WarningPanelSC>();
-        LoadUserInRuntime();
+        //LoadUserInRuntime();
         ClearAllPanels();
     }
-    private void OnSetUI()
+    public void OnSetUI()
     {
         gemTxt.text = gemToShow.ToString()+"C";
         coinTxtl.text = cointToShow.ToString()+"D";
+        curLevel.text = "xxx";
     }
 
     private void ClearAllPanels()
@@ -33,7 +32,6 @@ public class MainMenuSC : MonoBehaviour
         {
             if(panels[i].activeSelf) panels[i].gameObject.SetActive(false);
         }
-        warningPnl.gameObject.SetActive(false);
     }
     public void LoadUserInRuntime()
     {
@@ -43,29 +41,17 @@ public class MainMenuSC : MonoBehaviour
         OnSetUI();
     }
     #region Switch Scene & Panels
-    public void ToAmoury()
+    public void ToArcade()
     {
-        genCtr.OnChangeScene(1);
+        print("in call to Arcade");
+        genCtr.OnChangeScene(2);
     }
-    public void ToCommandeck()
+    public void ToLevelPlay()
     {
         genCtr.OnChangeScene(3);
     }
-    public void ToFlightDeck()
-    {
-        genCtr.OnChangeScene(2);
-    }
-    public void ToCentralScene()
-    {
-        genCtr.OnChangeScene(0);
-    }
     public void OnToOption() => genCtr.OnShowOption();
     public void OnUserInfor() => genCtr.OnShowInforPanel();
-    public void OnShowWarningPanel(int callOrder, int contentOrder)
-    {
-        warningPnl.gameObject.SetActive(true);
-        warningPnl.ShowContent(callOrder, contentOrder);
-    }
     public void OnShowPanels()
     {
         ClearAllPanels();

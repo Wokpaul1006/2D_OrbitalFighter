@@ -214,15 +214,10 @@ public class DataSC : MonoBehaviour
         PlayerPrefs.SetInt("AllowClaimDaily", state);
         pAllowClaimDaily = PlayerPrefs.GetInt("AllowClaimAllowClaimDaily");
     }
-    public void UpdateStreak(int typeStreak, int value)
+    public void UpdateStreak(int value)
     {
-        switch (typeStreak)
-        {
-            case 1:
-                PlayerPrefs.SetInt("PatrolDailyStreak", value);
-                pDailyStreak = value;
-                break;
-        }
+        PlayerPrefs.SetInt("PatrolDailyStreak", value);
+        pDailyStreak = value;
     }
 
     public void UpdatePlayerArmoryData(int dmg, int hpMax, int mgzSize, int armor, int regentSpd, int reloadSpd)

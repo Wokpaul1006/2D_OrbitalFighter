@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3A3BEF3C-0D7E-48C0-39B6-D9DE1875BB89}</ProjectGuid>
+    <ProjectGuid>{6708A5BA-461C-1189-D0D4-25552BD9CE03}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -66,8 +66,10 @@
     <Compile Include="Assets\Script\Enemy\MopivernSC.cs" />
     <Compile Include="Assets\Script\Enemy\EBullet.cs" />
     <Compile Include="Assets\Script\Player\PlayerSC.cs" />
+    <Compile Include="Assets\Script\PromotionSC.cs" />
     <Compile Include="Assets\Script\UIs\MainMenuSC.cs" />
     <Compile Include="Assets\Script\UIs\MailerSC.cs" />
+    <Compile Include="Assets\Script\PatrolEarningSC.cs" />
     <Compile Include="Assets\Script\SaveSystem.cs" />
     <Compile Include="Assets\Script\Background\SoundMN.cs" />
     <Compile Include="Assets\Script\Player\GuidedMissleSC.cs" />
@@ -80,24 +82,20 @@
     <Compile Include="Assets\Script\UIs\LeaderboardSC.cs" />
     <Compile Include="Assets\Script\UIs\InfoSC.cs" />
     <Compile Include="Assets\Script\GameplaySC\MainObject.cs" />
-    <Compile Include="Assets\Script\UIs\ArmorySC.cs" />
-    <Compile Include="Assets\Script\GameplaySC\StoryMN.cs" />
     <Compile Include="Assets\Script\Enemy\BloatipinozSC.cs" />
     <Compile Include="Assets\Script\Player\FlameSC.cs" />
     <Compile Include="Assets\Script\Player\AbzalatSC.cs" />
     <Compile Include="Assets\Script\UIs\LoadingSC.cs" />
     <Compile Include="Assets\Script\UIs\Achievements.cs" />
-    <Compile Include="Assets\Script\UIs\PatrolEarnSC.cs" />
     <Compile Include="Assets\Script\Background\OmniMN.cs" />
-    <Compile Include="Assets\Script\CharSetMN.cs" />
     <Compile Include="Assets\Script\Background\DialougeSC.cs" />
     <Compile Include="Assets\Script\Enemy\ArachilingsSC.cs" />
     <Compile Include="Assets\Script\Player\SecondaryWeapSC.cs" />
     <Compile Include="Assets\Script\Background\SpawnerSC.cs" />
+    <Compile Include="Assets\Script\GameplaySC\LevelPlaySC.cs" />
     <Compile Include="Assets\Script\Player\MagneticShieldSC.cs" />
     <Compile Include="Assets\Script\Enemy\ThornSC.cs" />
     <Compile Include="Assets\Script\Enemy\Broodlings.cs" />
-    <Compile Include="Assets\Script\GameplaySC\PvPGameplaySC.cs" />
     <Compile Include="Assets\Script\PlayerData.cs" />
     <Compile Include="Assets\Script\UIs\CreditsSC.cs" />
     <Compile Include="Assets\Script\Background\DataSC.cs" />

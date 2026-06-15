@@ -9,18 +9,12 @@ EditorBuildSettings:
     path: Assets/1.Loading.unity
     guid: 2d379b8a0d01d794d92f3d7e66951433
   - enabled: 1
-    path: Assets/2.CentralScene.unity
-    guid: e7e96ff989650e94982803a9ba973280
+    path: Assets/2.Menu.unity
+    guid: 0f6d0f5aac9b33a4b9c01c0a641cbd60
   - enabled: 1
-    path: Assets/5.MapScene.unity
-    guid: 75c71ba543ce56b40aea9941db9566e2
+    path: Assets/3.PlayArcade.unity
+    guid: f141f0a0fe9622f4cb9c7e84a4c96e36
   - enabled: 1
-    path: Assets/4.PrivateDormScene.unity
-    guid: 5b652c456c97e70488cab1407cbe3cff
-  - enabled: 1
-    path: Assets/3.AmouryScene.unity
-    guid: 1e97caaca68aac54d9b76da1919f3883
-  - enabled: 1
-    path: Assets/6.SetupPlayer.unity
-    guid: f6be97e7cc73d3741a3e93004b3a35c4
+    path: Assets/4.PlayLevel.unity
+    guid: be3f99cb67fb63b41a36b1330ed8e53b
   m_configObjects: {}

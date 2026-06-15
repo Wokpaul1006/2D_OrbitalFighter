@@ -7,13 +7,12 @@ using UnityEngine.UI;
 
 public class PlayerSC : MonoBehaviour
 {
-    [SerializeField] SuperBulletSC sBullet;
+    [SerializeField] List<GameObject> playeType = new List<GameObject>();
     [SerializeField] PBullet bullet;
     [HideInInspector] DataSC data;
     [HideInInspector] OmniMN genCtr;
-    [HideInInspector] ArcadeGameplaySC arcadeCtr;
-    [HideInInspector] GameplayController storyCtr;
-    [HideInInspector] ChallengeSC challengeCtr;
+    [HideInInspector] GameplayController arcadeCtr;
+    [HideInInspector] LevelPlaySC levelPlayCtr;
 
 
     #region clarify player stat
@@ -34,14 +33,11 @@ public class PlayerSC : MonoBehaviour
         switch (genCtr.gameMode)
         {
             case 1:
-                arcadeCtr = GameObject.Find("OBJ_ArcadeModeMN").GetComponent<ArcadeGameplaySC>();
+                arcadeCtr = GameObject.Find("ArcadeMN").GetComponent<GameplayController>();
                 break;
             case 2:
-                challengeCtr = GameObject.Find("CAN_Challenge").GetComponent<ChallengeSC>();
-                break;
-            case 3:
-                storyCtr = GameObject.Find("CAN_Story").GetComponent<GameplayController>();
-                break;
+                levelPlayCtr = GameObject.Find("LevePlayMN").GetComponent<LevelPlaySC>();
+                break;;
         }
         GetPlayerStatforStart();
     }
@@ -68,48 +64,35 @@ public class PlayerSC : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemies" || collision.gameObject.tag == "EAmmo")
-        {
-            //Case of player direct hit enemy
-            OnTakeDamage(10);
-            if (apCur <= 100) { PlusAP(); }
-            if (hpCur <= 0)
-            {
-                if (genCtr.gameMode == 1) arcadeCtr.OnOutOfHP();
-                else if (genCtr.gameMode == 2) { }
-            }
-            else
-            {
-                if (genCtr.gameMode == 1) arcadeCtr.IncreaseScore(1);
-                else if (genCtr.gameMode == 2)
-                {
-                    //call Score Handle of Story mode
-                }
-            }
+        //if (collision.gameObject.tag == "Enemies" || collision.gameObject.tag == "EAmmo")
+        //{
+        //    //Case of player direct hit enemy
+        //    OnTakeDamage(10);
+        //    if (apCur <= 100) { PlusAP(); }
+        //    if (hpCur <= 0)
+        //    {
+        //        if (genCtr.gameMode == 1) arcadeCtr.OnOutOfHP();
+        //        else if (genCtr.gameMode == 2) { }
+        //    }
+        //    else
+        //    {
+        //        if (genCtr.gameMode == 1) arcadeCtr.IncreaseScore(1);
+        //        else if (genCtr.gameMode == 2)
+        //        {
+        //            //call Score Handle of Story mode
+        //        }
+        //    }
 
-        }
-        else if (collision.gameObject.tag == "Meteor") arcadeCtr.OnOutOfHP();
+        //}
+        //else if (collision.gameObject.tag == "Meteor") arcadeCtr.OnOutOfHP();
     }
     #region Player Init
     private void GetPlayerStatforStart()
     {
-        apCur = 0;
-        apLoadSpdCur = (float)data.curAPCharge;
-        dmgCur = data.curDmgMax;
-        hpCur = data.curHealthMax * baseHP;
-        ammoCur = data.curAmmoMax * baseAmmo;
-        curWeaponA = data.curWeaponSelected_SlotA;
-        curWeaponB = data.curWeaponSelected_SlotB;
-
-        SetReload();
-        SetRegentHp();
-        SetAmour();
-        //SetSecondary();
-
         //Update more code of additional weapon here
         if (genCtr.gameMode == 1) 
         {
-            arcadeCtr.UpdatePlayerStat(hpCur, apCur, ammoCur, arcadeCtr.arcadeScore, arcadeCtr.arcadeLv); //UPdate start
+            //arcadeCtr.UpdatePlayerStat(hpCur, apCur, ammoCur, arcadeCtr.arcadeScore, arcadeCtr.arcadeLv); //UPdate start
         }else if (genCtr.gameMode == 2) 
         { 
 
@@ -123,52 +106,7 @@ public class PlayerSC : MonoBehaviour
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         data = GameObject.Find("OBJ_DataCtr").GetComponent<DataSC>();
     }
-    private void SetReload()
-    {
-        float tempAmmoLoadSpd = (float)data.curAmmoLoadSpd;
-        ammoLoadSpdCur = (3 * (1 / tempAmmoLoadSpd));
-    }
-    private void SetRegentHp() 
-    {
-        float tempRegnetSpdCur = (float)data.curHPRegent;
-        hpRegnetSpdCur = (3 * (1 / tempRegnetSpdCur));
-    } 
-    private void SetAmour()
-    {
-        switch (data.curAmor)
-        {
-            case 1:
-                amorCur = 1;
-                break;
-            case 2:
-                amorCur = 2;
-                break;
-            case 3:
-                amorCur = 3;
-                break;
-            case 4:
-                amorCur = 4;
-                break;
-            case 5:
-                amorCur = 5;
-                break;
-            case 6:
-                amorCur = 6;
-                break;
-            case 7:
-                amorCur = 7;
-                break;
-            case 8:
-                amorCur = 8;
-                break;
-            case 9:
-                amorCur = 9;
-                break;
-            case 10:
-                amorCur = 10;
-                break;
-        }
-    }
+ 
     #endregion
 
     #region Player Activities
@@ -218,12 +156,10 @@ public class PlayerSC : MonoBehaviour
                         if (ammoCur <= 0)
                         {
                             isReload = true;
-                            arcadeCtr.DecreaseAmmo();
                             StartCoroutine(ReloadAmmo());
                         }
                         else if (ammoCur >= data.curAmmoMax)
                         {
-                            arcadeCtr.DecreaseAmmo();
                             StopCoroutine(ReloadAmmo());
                         }
                         timer = 0;
@@ -254,12 +190,10 @@ public class PlayerSC : MonoBehaviour
                 if (ammoCur <= 0)
                 {
                     isReload = true;
-                    arcadeCtr.DecreaseAmmo();
                     StartCoroutine(ReloadAmmo());
                 }
                 else if (ammoCur >= data.curAmmoMax)
                 {
-                    arcadeCtr.DecreaseAmmo();
                     StopCoroutine(ReloadAmmo());
                 }
                 timer = 0;
@@ -280,7 +214,6 @@ public class PlayerSC : MonoBehaviour
         ammoCur = data.curAmmoMax * baseAmmo;
         isReload = false;
         //Add reload animation here
-        arcadeCtr.DecreaseAmmo();
     }
     public IEnumerator RegentHealth()
     {
@@ -288,7 +221,6 @@ public class PlayerSC : MonoBehaviour
         if (hpCur >= 0 && hpCur < data.curHealthMax * 100)
         {
             hpCur = data.curHealthMax * baseHP;
-            arcadeCtr.arcadeHP = hpCur;
             StartCoroutine(RegentHealth());
         }
         else if (hpCur >= data.curHealthMax * 100)
@@ -304,12 +236,10 @@ public class PlayerSC : MonoBehaviour
         {
             int hpRemain = hpCur - dmg;
             hpCur = hpRemain;
-            arcadeCtr.DecreaseHP(hpCur);
         }
     }
     public void PlusAP()
     {
         apCur += 10;
-        arcadeCtr.IncreaseAP(apCur);
     }
 }

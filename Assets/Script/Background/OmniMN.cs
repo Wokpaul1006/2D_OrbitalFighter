@@ -35,31 +35,25 @@ public class OmniMN : Singleton<OmniMN>
         toDay = DateTime.Today.Day.ToString();
         versionTxt.text = Application.version.ToString();
     }
-    public void OnChangeScene(sbyte sceneOder)
+    public void OnChangeScene(int sceneOder)
     {
+        print("scenOrder = " + sceneOder);
         switch (sceneOder)
         {
-            case 0: //To Mainmenu
-                SceneManager.LoadScene("2.CentralScene");
+            case 0:
+                SceneManager.LoadScene("1.Loading");
                 break;
             case 1:
-                SceneManager.LoadScene("3.AmouryScene");
-                gameMode = 1; //Arcade
+                SceneManager.LoadScene("2.Menu");
+                gameMode = 0;
                 break;
             case 2:
-                SceneManager.LoadScene("4.PrivateDormScene");
-                gameMode = 2; //Story
+                SceneManager.LoadScene("3.PlayArcade");
+                gameMode = 1;
                 break;
             case 3:
-                SceneManager.LoadScene("5.MapScene");
-                gameMode = 3; //PvP
-                break;
-            case 5:
-                SceneManager.LoadScene("6.SetupPlayer");
-                break;
-            case 6:
-                //Send request to server that player Quit game
-                Application.Quit();
+                SceneManager.LoadScene("4.PlayLevel");
+                gameMode = 2;
                 break;
         }
     }

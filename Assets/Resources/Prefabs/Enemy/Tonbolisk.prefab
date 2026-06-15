@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1011931207691668420}
   - component: {fileID: 1011931207691668421}
   - component: {fileID: 1011931207691668422}
-  - component: {fileID: 2332338805456627900}
+  - component: {fileID: 7857396127763970745}
   m_Layer: 0
   m_Name: Tonbolisk
   m_TagString: Enemies
@@ -117,21 +117,21 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 4.89}
+    oldSize: {x: 5.12, y: 2.16}
     newSize: {x: 5.12, y: 4.87}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.12, y: 2.66}
+  m_Size: {x: 5.12, y: 2.16}
   m_EdgeRadius: 0
 --- !u!50 &1011931207691668422
 Rigidbody2D:
@@ -160,7 +160,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2332338805456627900
+--- !u!114 &7857396127763970745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,11 +169,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1011931207691668423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ce6c805ff8509f4485b8ec1943c78ac, type: 3}
+  m_Script: {fileID: 11500000, guid: be08ec164e465a445b2c0272d3d2b652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savita: {fileID: 8348341804244783739, guid: 16dc2fc5aae32a647b36e927de47edce, type: 3}
-  healthBar: {fileID: 5119480280514356853}
+  savita: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!1 &1027273880474769360
 GameObject:
   m_ObjectHideFlags: 0

@@ -88,13 +88,12 @@ public class ShopSC : MonoBehaviour
             else return false;
         }else
         {
-            menuCtr.OnShowWarningPanel(2, 2);
             return false;
         }
     }
     private void HandleNotAllowBuy(int nameOrder, int contentOrder) 
     {
-        menuCtr.OnShowWarningPanel(nameOrder, contentOrder);
+        //menuCtr.OnShowWarningPanel(nameOrder, contentOrder);
     } 
     public void OnBuyGatling()
     {

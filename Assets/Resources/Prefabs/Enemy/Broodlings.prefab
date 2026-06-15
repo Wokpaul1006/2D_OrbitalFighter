@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5063756920065987581}
   - component: {fileID: 9133716001448880007}
   - component: {fileID: -6287015169959202240}
-  - component: {fileID: 8066756110938423587}
+  - component: {fileID: 4559963205271176447}
   m_Layer: 0
   m_Name: Broodlings
   m_TagString: EAmmo
@@ -144,7 +144,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -160,7 +160,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.12, y: 4.97}
   m_EdgeRadius: 0
---- !u!114 &8066756110938423587
+--- !u!114 &4559963205271176447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,9 +169,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1771773256478368585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68f7949d38fffbd40bc2426fc71e1556, type: 3}
+  m_Script: {fileID: 11500000, guid: ee7152c386303194a849b4f3628fbbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  savita: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!1 &3069548075685931329
 GameObject:
   m_ObjectHideFlags: 0

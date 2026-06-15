@@ -19,15 +19,21 @@ public class GameOverSC : MonoBehaviour
     public void OnMainMenu()
     {
         //Inter Ads Sometime
-        genCtr.OnChangeScene(0);
-    }
-    public void OnQuitGame() 
-    {
-        Application.Quit();
+        genCtr.OnChangeScene(1);
     }
     public void OnContinue()
     {
         //Load Reward Ads here
-        genCtr.OnChangeScene(1);
+        if(genCtr.gameMode == 1)
+        {
+            //Arcade
+            genCtr.OnChangeScene(2);
+        }
+        else if(genCtr.gameMode == 2)
+        {
+            //LevelPlay
+            genCtr.OnChangeScene(3);
+        }
+
     }
 }
