@@ -24,31 +24,20 @@ public class InfoSC : Singleton<InfoSC>
         {
             playerName.text = data.playerName;
             OveridePlayerInfo();
-            OveridePlayerStat();
         }
     }
     public void OveridePlayerInfo()
     { 
-        curHighScore.text = data.playerHighscore.ToString();
-        totalScore.text = data.playerCoin.ToString();
-        totoGems.text = data.playerGems.ToString();
+        curHighScore.text = data.pHighscore.ToString();
+        totalScore.text = data.pCoin.ToString();
+        totoGems.text = data.pGems.ToString();
     }
 
-    public void OveridePlayerStat()
-    {
-        curDmglvl.text = data.curDmgMax.ToString();
-        curHPLvl.text = data.curHealthMax.ToString();
-        curAmmoCapacity.text = data.curAmmoMax.ToString();
-        curRegentLvl.text = data.curHPRegent.ToString();
-        curReloadLvl.text = data.curAmmoLoadSpd.ToString();
-        curAmorLv.text = data.curAmor.ToString();
-    }
     public void DeletePlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
         data.SetNewPlayer();
         OveridePlayerInfo();
-        OveridePlayerStat();
     }
     public void SendDatatoServer()
     {

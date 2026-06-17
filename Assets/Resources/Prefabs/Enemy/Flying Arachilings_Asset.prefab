@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4863676939587017518}
   - component: {fileID: 4863676939587017519}
   - component: {fileID: 4863676939587017512}
-  - component: {fileID: 3993093628595517994}
+  - component: {fileID: 3255786323837299081}
   m_Layer: 0
   m_Name: Flying Arachilings_Asset
   m_TagString: Enemies
@@ -160,7 +160,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3993093628595517994
+--- !u!114 &3255786323837299081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,11 +169,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4863676939587017513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 725d2167c7f29c24abe9296c56df103c, type: 3}
+  m_Script: {fileID: 11500000, guid: 430721aba51576948b8e9eb2602db9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savita: {fileID: 8348341804244783739, guid: 16dc2fc5aae32a647b36e927de47edce, type: 3}
-  healthBar: {fileID: 7530743699985913906}
+  thorne: {fileID: 8348341804244783739, guid: 16dc2fc5aae32a647b36e927de47edce, type: 3}
 --- !u!1 &6270671509040613369
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,8 +7,8 @@ public class GameOverSC : MonoBehaviour
 {
     [SerializeField] OmniMN genCtr;
     [HideInInspector] DataSC dataCtr;
-    [HideInInspector] ArcadeGameplaySC arcadeCtr;
-    [HideInInspector] GameplayController storyCtr;
+    [HideInInspector] LevelPlaySC storyCtr;
+    [HideInInspector] GameplayController arcadeCtr;
     void Start()
     {
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
@@ -23,6 +23,7 @@ public class GameOverSC : MonoBehaviour
     }
     public void OnContinue()
     {
+        print("Game mode = " + genCtr.gameMode);
         //Load Reward Ads here
         if(genCtr.gameMode == 1)
         {
@@ -34,6 +35,9 @@ public class GameOverSC : MonoBehaviour
             //LevelPlay
             genCtr.OnChangeScene(3);
         }
+    }
+    public void OnContinueByAds()
+    {
 
     }
 }

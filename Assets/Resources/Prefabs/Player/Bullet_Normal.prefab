@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2684192340494837534}
   - component: {fileID: -3907459881718077091}
   - component: {fileID: 8483303195818703913}
-  - component: {fileID: 5283640479704629615}
+  - component: {fileID: 2099717657466748428}
   m_Layer: 0
   m_Name: Bullet_Normal
   m_TagString: PAmmo
@@ -159,7 +159,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5283640479704629615
+--- !u!114 &2099717657466748428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

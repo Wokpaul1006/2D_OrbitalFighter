@@ -6,7 +6,6 @@ public class SpawnerSC : MonoBehaviour
 {
     //enemies
     [SerializeField] WyvernozSC wyvern;
-    [SerializeField] ArachilingsSC arachiling;
     [SerializeField] BahamozSC bahamoz;
     [SerializeField] ChornowormSC chronoworm;
     [SerializeField] MaciliozSC macilios;
@@ -19,10 +18,12 @@ public class SpawnerSC : MonoBehaviour
     public int gameMode;
     public int curLvl;
     private float spawnSpd; //Ajudt this
+    Vector3 curSpawnerPos;
     private void Start()
     {
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         gameMode = genCtr.gameMode;
+        curSpawnerPos = gameObject.transform.position;
         switch (gameMode)
         {
             case 1:
@@ -106,51 +107,32 @@ public class SpawnerSC : MonoBehaviour
     #region Object to spawn
     private void WyvernosSpawn()
     {
-        float randomX;
-        randomX = Random.Range(-3, 3);
-        Instantiate(wyvern, new Vector3(randomX, 3, 0), Quaternion.identity);
+        Instantiate(wyvern,curSpawnerPos, Quaternion.identity);
         //Invoke("SpawnPerShot", 1.25f);
-    }
-    private void ArachilingSpawn()
-    {
-        float randomX;
-        randomX = Random.Range(-3, 3);
-        Instantiate(arachiling, new Vector3(randomX, 3, 0), Quaternion.Euler(0, 0, -90f));
-        //Invoke("SpawnDualShot", 1.5f);
     }
     private void BahamozSpawn()
     {
-        float randomX;
-        randomX = Random.Range(-3, 3);
-        Instantiate(bahamoz, new Vector3(randomX, 3,0), Quaternion.Euler(0, 0, 0f)) ;
+        Instantiate(bahamoz, curSpawnerPos, Quaternion.Euler(0, 0, 0f)) ;
         //Invoke("SpawnDiagonal", 1f);
     }
     private void ChronoWormSpawn()
     {
-        float randomX;
-        randomX = Random.Range(-3, 3);
-        Instantiate(chronoworm, new Vector3(randomX, 3, 0), Quaternion.Euler(0, 0, 0f));
+        Instantiate(chronoworm, curSpawnerPos, Quaternion.Euler(0, 0, 0f));
         //Invoke("SpawnRandom", 2.25f);
     }
     private void MaciliousSpawn()
     {
-        float randomX;
-        randomX = Random.Range(-3, 3);
-        Instantiate(macilios, new Vector3(randomX, 3, 0), Quaternion.Euler(0, 0, 0f));
+        Instantiate(macilios, curSpawnerPos, Quaternion.Euler(0, 0, 0f));
         //Invoke("SpawnChrono", 2.5f);
     }
     private void MorpivernSpawn()
     {
-        float randomX;
-        randomX = Random.Range(-3, 3);
-        Instantiate(morpivern, new Vector3(randomX, 3, 0), Quaternion.Euler(0, 0, 0f));
+        Instantiate(morpivern, curSpawnerPos, Quaternion.Euler(0, 0, 0f));
         //Invoke("SpawnChrono", 2.5f);
     }
     private void TharnatosSpawn()
     {
-        float randomX;
-        randomX = Random.Range(-3, 3);
-        Instantiate(thanatos, new Vector3(randomX, 3, 0), Quaternion.Euler(0, 0, 0f));
+        Instantiate(thanatos, curSpawnerPos, Quaternion.Euler(0, 0, 0f));
         //Invoke("SpawnChrono", 2.5f);
     }
     #endregion

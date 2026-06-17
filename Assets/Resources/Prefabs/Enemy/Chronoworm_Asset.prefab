@@ -173,7 +173,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thorne: {fileID: 8348341804244783739, guid: 16dc2fc5aae32a647b36e927de47edce, type: 3}
-  healthBar: {fileID: 5427678779903378345}
 --- !u!1 &2153223422212825872
 GameObject:
   m_ObjectHideFlags: 0

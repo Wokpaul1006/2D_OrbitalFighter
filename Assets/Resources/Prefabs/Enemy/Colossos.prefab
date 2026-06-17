@@ -117,7 +117,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -172,8 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce6c805ff8509f4485b8ec1943c78ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savita: {fileID: 8348341804244783739, guid: 16dc2fc5aae32a647b36e927de47edce, type: 3}
-  healthBar: {fileID: 5119480280514356853}
+  thorne: {fileID: 8348341804244783739, guid: 16dc2fc5aae32a647b36e927de47edce, type: 3}
 --- !u!1 &1027273880474769360
 GameObject:
   m_ObjectHideFlags: 0

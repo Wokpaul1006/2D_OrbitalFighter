@@ -35,18 +35,15 @@ public class ShopSC : MonoBehaviour
     }
     void GetPlayerData()
     {
-        prefCoins = data.playerCoin;
-        prefGem = data.playerGems;
-        prefSlotA = data.curWeaponSelected_SlotA;
-        prefSlotB = data.curWeaponSelected_SlotB;
+        prefCoins = data.pCoin;
+        prefGem = data.pGems;
 
         UpdateShopUIs(); //Init call
     }
     void UpdatePlayerData(int coin, int weaponOrder)
     {
         //Call each time buy something
-        data.UpdateTotalScore(coin);
-        data.UpdateWeapon(weaponOrder);
+        data.UpdatePlayerEconomics(1, coin, 0);
         SetCurrency();
     }
     void UpdateShopUIs()
@@ -304,8 +301,8 @@ public class ShopSC : MonoBehaviour
     #region SetItem
     private void SetCurrency()
     {
-        prefCoins = data.playerCoin;
-        prefGem = data.playerGems;
+        prefCoins = data.pCoin;
+        prefGem = data.pGems;
         coinText.text = prefCoins.ToString();
         gemText.text = prefGem.ToString();
     }

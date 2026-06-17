@@ -36,8 +36,8 @@ public class MainMenuSC : MonoBehaviour
     public void LoadUserInRuntime()
     {
         //Call everytime in-game need to load data
-        gemToShow = data.playerGems;
-        cointToShow = data.playerCoin;
+        gemToShow = data.pGems;
+        cointToShow = data.pCoin;
         OnSetUI();
     }
     #region Switch Scene & Panels
@@ -52,14 +52,11 @@ public class MainMenuSC : MonoBehaviour
     }
     public void OnToOption() => genCtr.OnShowOption();
     public void OnUserInfor() => genCtr.OnShowInforPanel();
-    public void OnShowPanels()
+    public void OnShowPanels(int caseIndex)
     {
-        ClearAllPanels();
+        if (caseIndex == -1) { ClearAllPanels(); }
+        else if (caseIndex != -1) panels[caseIndex].gameObject.SetActive(true);
     }
-    #endregion
-
-    #region Panel Define
-
     #endregion
     
 }

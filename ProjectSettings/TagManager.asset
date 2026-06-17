@@ -8,8 +8,7 @@ TagManager:
   - PAmmo
   - EAmmo
   - Enemies
-  - PGadget
-  - PMelee
+  - DefPoint
   layers:
   - Default
   - TransparentFX

@@ -11,7 +11,7 @@ public class GameplayController : MonoBehaviour
     [HideInInspector] DataSC data;
     [SerializeField] List<Transform> defPos = new List<Transform>();
     [SerializeField] PlayerSC player;
-    [SerializeField] SpawnerSC spawn;
+    [SerializeField] List<SpawnerSC> spawn = new List<SpawnerSC>();
     [SerializeField] Text lvlTxt, pointTxt;
 
     [HideInInspector] public List<Vector3> playerPos = new List<Vector3>();
@@ -61,8 +61,8 @@ public class GameplayController : MonoBehaviour
     private void OnOutOfLife()
     {
         genCtr.OnShowGameOver();
-        int tempCoin = data.playerCoin + arcadeScore;
-        data.UpdateTotalScore(tempCoin);
+        int tempCoin = data.pCoin + arcadeScore;
+        data.UpdatePlayerEconomics(1, tempCoin, 0);
     }
     public void IncreaseScore(int score)
     {
@@ -89,5 +89,9 @@ public class GameplayController : MonoBehaviour
             targetLv = arcadeLv * 10;
         }
         //spawnerCtr.UpdateCurrentLevelArcade(arcadeLv);
+    }
+    public void OnBuyDefPoint()
+    {
+
     }
 }

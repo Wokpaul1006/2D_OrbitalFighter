@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2594396449805418989}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,8 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5d187f2af6cde4a94efc30c3bc5863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: []
-  bullet: {fileID: 5283640479704629615, guid: 2db67bd3deef7b24db13a62520883a3c, type: 3}
+  playerType:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  bullet: {fileID: 2099717657466748428, guid: 2db67bd3deef7b24db13a62520883a3c, type: 3}
   baseHP: 100
   fireRate: 0.1
 --- !u!50 &4498813657614537807

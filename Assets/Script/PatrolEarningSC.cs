@@ -112,7 +112,7 @@ public class PatrolEarningSC : MonoBehaviour
 
         print("tempFinalScoreToOverride = " + tempFinalScoreToOverride);
 
-        data.UpdateTotalScore(tempFinalScoreToOverride); // Update score
+        data.UpdatePlayerEconomics(1, tempFinalScoreToOverride,0); // Update score
         data.UpdateStreak(streakDaily); //Update streak
         data.UpdatePatrolDailyReward(lastCollectDay); //Update last collect day
         ShowRewardDaily();
