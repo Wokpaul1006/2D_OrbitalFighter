@@ -43,9 +43,6 @@ public class ArachilingsSC : MonoBehaviour
         if (collision.gameObject.tag == "Player") Exploid();
         else if (collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")
         {
-            float tempDmgTake;
-            tempDmgTake = curHP - (float)player.dmgCur;
-            curHP = tempDmgTake;
             UpdateHealthBar(curHP);
             if (curHP <= 0)
             {

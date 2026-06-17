@@ -5,22 +5,17 @@ using UnityEngine.UI;
 
 public class DataSC : MonoBehaviour
 {
-    [HideInInspector] public string nameFistPlay;
-    [HideInInspector] public string playerName;
-    [HideInInspector] public int playerHighscore;
-    [HideInInspector] public int playerCoin; //TotaScore
-    [HideInInspector] public int playerGems;
-    [HideInInspector] public int curDmgMax, curHealthMax, curAmmoMax;
-    [HideInInspector] public int curHPRegent, curAPCharge, curAmmoLoadSpd, curAmor;
-    [HideInInspector] public int curWeaponSelected_SlotA, curWeaponSelected_SlotB;
-    [HideInInspector] public int curAbilitySelected;
-    [HideInInspector] private int curThemeState, curSFXState;
-    [HideInInspector] private int playerClass;
     [HideInInspector] OptionSC option;
 
+    [HideInInspector] public string nameFistPlay;
+    [HideInInspector] public string playerName;
+    [HideInInspector] public int pHighscore, pLevelPlay;
+    [HideInInspector] public int pCoin, pGems; //Economic
+    [HideInInspector] private int curThemeState, curSFXState;
+    [HideInInspector] private int playerClass;
+
     public bool isFirstPlay;
-    public int pAllowClaimDaily;
-    public int pDailyStreak;
+    public int pAllowClaimDaily, pDailyStreak;
     public string pLastDailyClaim;
     private void Awake()
     {
@@ -61,21 +56,12 @@ public class DataSC : MonoBehaviour
         Debug.Log("in new layer");
         PlayerPrefs.SetInt("HasPlayed", 0);
         PlayerPrefs.SetInt("Highscore", 0); //For total overview, leaderboard
+        PlayerPrefs.SetInt("LevelPlayed", 0); //Player Level
         PlayerPrefs.SetInt("Totalscore", 0); //Actual player in-game currency
         PlayerPrefs.SetInt("TotalGems", 0); //Player's PIA currency
-        PlayerPrefs.SetInt("CurWeaponSlot_A", 0); //index of weapon order in list. 0 is non
-        PlayerPrefs.SetInt("CurWeaponSlot_B", 0); //index of weapon order in list. 0 is non
-        PlayerPrefs.SetInt("CurAblility", 0); //index of ability order in list. 0 is non
 
         //Upgrade able section
-        PlayerPrefs.SetInt("Class", 1000);
-        PlayerPrefs.SetInt("CurUpgradeDmg", 1); //Damage upgrade
-        PlayerPrefs.SetInt("CurUpgradeHP", 1); //Max HP upgrade
-        PlayerPrefs.SetInt("CurUpgradeMgz", 1); //Max Ammo magazine upgrade
-        PlayerPrefs.SetInt("CurUpgradeReloadLv", 1); //Upgrade Reload Spd
-        PlayerPrefs.SetInt("CurUpgradeRegen", 1); //Upgrade HP regent spd
-        PlayerPrefs.SetInt("CurArmorLevel", 1); //Upgrade amor lv
-        PlayerPrefs.SetInt("CurAPChargeLv", 1); //Upgrade AP load spd
+        PlayerPrefs.SetInt("Class", 0);
 
         //System Control
         PlayerPrefs.SetInt("SFXState", 1);
@@ -83,11 +69,8 @@ public class DataSC : MonoBehaviour
 
         //Patrol Reward
         PlayerPrefs.SetInt("AllowClaimDaily", 0);
-        PlayerPrefs.SetInt("AllowClaimMonthly", 0);
         PlayerPrefs.SetString("LastPatrolDailyTime", "");
-        PlayerPrefs.SetString("LastPatrolMonthlyTime", "");
         PlayerPrefs.SetInt("PatrolDailyStreak", 0);
-        PlayerPrefs.SetInt("PatrolMonthlyStreak", 0);
 
         Invoke("LoadOldPlayer", 3f); //De tam thoi
     }
@@ -95,21 +78,11 @@ public class DataSC : MonoBehaviour
     {
         //This function load player information if there are not FIRST PLAY
         playerName = PlayerPrefs.GetString("PlayerName");
-        playerHighscore = PlayerPrefs.GetInt("Highscore");
-        playerCoin = PlayerPrefs.GetInt("Totalscore");
-        playerGems = PlayerPrefs.GetInt("TotalGems");
+        pHighscore = PlayerPrefs.GetInt("Highscore");
+        pLevelPlay = PlayerPrefs.GetInt("LevelPlayed");
+        pCoin = PlayerPrefs.GetInt("Totalscore");
+        pGems = PlayerPrefs.GetInt("TotalGems");
         playerClass = PlayerPrefs.GetInt("Class");
-        curWeaponSelected_SlotA = PlayerPrefs.GetInt("CurWeaponSlot_A");
-        curWeaponSelected_SlotB = PlayerPrefs.GetInt("CurWeaponSlot_B");
-        curAbilitySelected = PlayerPrefs.GetInt("CurAblility");
-
-        curDmgMax = PlayerPrefs.GetInt("CurUpgradeDmg");
-        curHealthMax = PlayerPrefs.GetInt("CurUpgradeHP");
-        curAmmoMax = PlayerPrefs.GetInt("CurUpgradeMgz");
-        curHPRegent = PlayerPrefs.GetInt("CurUpgradeRegen");
-        curAPCharge = PlayerPrefs.GetInt("CurAPChargeLv");
-        curAmmoLoadSpd = PlayerPrefs.GetInt("CurUpgradeReloadLv");
-        curAmor = PlayerPrefs.GetInt("CurArmorLevel");
 
         //Patrol Reward
         pLastDailyClaim = PlayerPrefs.GetString("LastPatrolDailyTime");
@@ -133,14 +106,29 @@ public class DataSC : MonoBehaviour
         PlayerPrefs.SetInt("SFXState", curSFXState);
         PlayerPrefs.SetInt("ThemeState", curThemeState);
     }
-    public void UpdatePlayerStatToPlayerPrefs(int coin)
+    public void UpdatePlayerEconomics(int state, int coin, int gems)
     {
-        playerCoin = coin;
-        int tempHighScore;
-        tempHighScore = playerHighscore + playerCoin;
-        playerHighscore = tempHighScore;
-        PlayerPrefs.SetInt("Totalscore", playerCoin);
-        PlayerPrefs.SetInt("Highscore", playerHighscore);
+        switch (state)
+        {
+            case 0:
+                PlayerPrefs.SetInt("Totalscore", pCoin);
+                pCoin = PlayerPrefs.GetInt("Totalscore");
+                break;
+            case 1:
+                PlayerPrefs.SetInt("TotalGems", pGems);
+                pGems = PlayerPrefs.GetInt("TotalGems");
+                break;
+        }
+    }
+    public void UpdateHighScore(int value)
+    {
+        PlayerPrefs.SetInt("Highscore", value); //For total overview, leaderboard
+        pHighscore = PlayerPrefs.GetInt("Highscore");
+    }
+    public void UpdateLevelPlay(int value)
+    {
+        PlayerPrefs.SetInt("LevelPlayed", value); //Player Level
+        pLevelPlay = PlayerPrefs.GetInt("LevelPlayed");
     }
     public void DeletePlayer() { PlayerPrefs.DeleteAll(); }
 
@@ -153,21 +141,6 @@ public class DataSC : MonoBehaviour
     {
         PlayerPrefs.SetString("PlayerName", name);
         playerName = PlayerPrefs.GetString("PlayerName");
-    }
-    public void UpdateHighScore(int highScore)
-    {
-        PlayerPrefs.SetInt("Highscore", highScore);
-        playerHighscore = PlayerPrefs.GetInt("Highscore");
-    }
-    public void UpdateTotalScore(int currency)
-    {
-        PlayerPrefs.SetInt("Totalscore", currency);
-        playerCoin = PlayerPrefs.GetInt("Totalscore");
-    }
-    public void UpdateTotalGem(int gems)
-    {
-        PlayerPrefs.SetInt("TotalGems", gems);
-        playerGems = PlayerPrefs.GetInt("TotalGems");
     }
     public void UpdateSFXState(int sfxState)
     {
@@ -184,26 +157,6 @@ public class DataSC : MonoBehaviour
         PlayerPrefs.SetInt("Class", value);
         playerClass = PlayerPrefs.GetInt("Class");
     }
-    public void UpdateAbility(int abilityOder)
-    {
-        PlayerPrefs.SetInt("CurAblility", abilityOder);
-        curAbilitySelected = PlayerPrefs.GetInt("CurAblility");
-    }
-    public void UpdateWeapon(int weaponOder)
-    {
-        PlayerPrefs.SetInt("CurWeaponID", weaponOder);
-        if(curWeaponSelected_SlotA == 0)
-        {
-            PlayerPrefs.SetInt("CurWeaponSlot_A", weaponOder);
-            curWeaponSelected_SlotA = PlayerPrefs.GetInt("CurWeaponSlot_A");
-        }else if(curWeaponSelected_SlotA != 0 && curWeaponSelected_SlotB == 0)
-        {
-            PlayerPrefs.SetInt("CurWeaponSlot_B", weaponOder);
-            curWeaponSelected_SlotB = PlayerPrefs.GetInt("CurWeaponSlot_B");
-        }
-        else if(curWeaponSelected_SlotA != 0 && curWeaponSelected_SlotB != 0) 
-        { }
-    }
     public void UpdatePatrolDailyReward(string lastPatrolDaily)
     {
         PlayerPrefs.SetString("LastPatrolDailyTime", lastPatrolDaily);
@@ -219,29 +172,7 @@ public class DataSC : MonoBehaviour
         PlayerPrefs.SetInt("PatrolDailyStreak", value);
         pDailyStreak = value;
     }
-
-    public void UpdatePlayerArmoryData(int dmg, int hpMax, int mgzSize, int armor, int regentSpd, int reloadSpd)
-    {
-        PlayerPrefs.SetInt("CurUpgradeDmg", dmg);
-        PlayerPrefs.SetInt("CurUpgradeHP", hpMax);
-        PlayerPrefs.SetInt("CurUpgradeMgz", mgzSize);
-        PlayerPrefs.SetInt("CurArmorLevel", armor);
-        PlayerPrefs.SetInt("CurUpgradeRegen", regentSpd);
-        PlayerPrefs.SetInt("CurUpgradeReloadLv", reloadSpd);
-
-        curDmgMax = PlayerPrefs.GetInt("CurUpgradeDmg");
-        curHealthMax = PlayerPrefs.GetInt("CurUpgradeHP");
-        curAmmoMax = PlayerPrefs.GetInt("CurUpgradeMgz");
-        curAmor = PlayerPrefs.GetInt("CurArmorLevel");
-        curHPRegent = PlayerPrefs.GetInt("CurUpgradeRegen");
-        curAmmoLoadSpd = PlayerPrefs.GetInt("CurUpgradeReloadLv");
-    }
     #endregion
-
-    private void OnUpdateSystem()
-    {
-           
-    }
     private bool CheckFirstPlay()
     {
         if (PlayerPrefs.GetInt("HasPlayed") == 0) return isFirstPlay = true;

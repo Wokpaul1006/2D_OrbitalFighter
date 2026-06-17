@@ -7,11 +7,9 @@ public class TharnatosSC : MonoBehaviour
 {
     //Move random axis, release surrounded thorns
     [HideInInspector] OmniMN genCtr;
-    [HideInInspector] ArcadeGameplaySC arcadeCtr;
-    [HideInInspector] GameplayController storyCtr;
+    [HideInInspector] GameplayController arcadeCtr;
     [SerializeField] SalvitaSC savita;
     [HideInInspector] PlayerSC player;
-    [SerializeField] Image healthBar;
     //Unit Prperties
     private float moveSpd;
     private float atkDmg;
@@ -27,7 +25,7 @@ public class TharnatosSC : MonoBehaviour
         switch (genCtr.gameMode)
         {
             case 1:
-                arcadeCtr = GameObject.Find("OBJ_ArcadeModeMN").GetComponent<ArcadeGameplaySC>();
+                arcadeCtr = GameObject.Find("ArcadeMN").GetComponent<GameplayController>();
                 break;
             case 2:
                 break;
@@ -61,14 +59,10 @@ public class TharnatosSC : MonoBehaviour
         if (collision.gameObject.tag == "Player") Exploid();
         else if (collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")
         {
-            float tempDmgTake;
-            tempDmgTake = curHP - (float)player.dmgCur;
-            curHP = tempDmgTake;
-            UpdateHealthBar(curHP);
             if (curHP <= 0)
             {
-                arcadeCtr.IncreaseScore(selfScore);
-                arcadeCtr.UpdadeEnemyKill();
+                //arcadeCtr.IncreaseScore(selfScore);
+                //arcadeCtr.UpdadeEnemyKill();
                 Exploid();
             }
         }
@@ -106,8 +100,4 @@ public class TharnatosSC : MonoBehaviour
     void MOveRight() => gameObject.transform.position = Vector3.right * moveSpd * Time.deltaTime;
     void MoveLeft() => gameObject.transform.position = Vector3.left * moveSpd * Time.deltaTime;
     #endregion
-    private void UpdateHealthBar(float hpBeDecrease)
-    {
-        healthBar.fillAmount = hpBeDecrease / maxHP;
-    }
 }

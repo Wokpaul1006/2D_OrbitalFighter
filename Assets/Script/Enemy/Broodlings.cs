@@ -20,7 +20,6 @@ public class Broodlings : EBullet
     {
         if(collision.gameObject.tag == "Player")
         {
-            player.OnTakeDamage(damage);
             arcadeCtr.UpdadeEnemyKill();
             Destroy(gameObject);
         }

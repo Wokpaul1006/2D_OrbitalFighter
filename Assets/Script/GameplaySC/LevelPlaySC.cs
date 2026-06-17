@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class LevelPlaySC : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] List<SpawnerSC> spawnerList = new List<SpawnerSC>();
+    [SerializeField] List<GameObject> defendList = new List<GameObject>();
+
+    private int curLevel;
+    private int pHP; 
     void Start()
     {
         

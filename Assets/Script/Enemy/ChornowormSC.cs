@@ -7,11 +7,9 @@ public class ChornowormSC : MonoBehaviour
 {
     //Chrono across the screen, each time arrive, lauch a thorn to player direction, thorn not chase player
     [HideInInspector] OmniMN genCtr;
-    [HideInInspector] ArcadeGameplaySC arcadeCtr;
-    [HideInInspector] GameplayController storyCtr;
-    [SerializeField] ThornSC thorne;
+    [HideInInspector] GameplayController arcadeCtr;
+    [SerializeField] SalvitaSC thorne;
     [HideInInspector] PlayerSC player;
-    [SerializeField] Image healthBar;
 
     //Unit Prperties
     private float moveSpd;
@@ -28,7 +26,7 @@ public class ChornowormSC : MonoBehaviour
         switch (genCtr.gameMode)
         {
             case 1:
-                arcadeCtr = GameObject.Find("OBJ_ArcadeModeMN").GetComponent<ArcadeGameplaySC>();
+                arcadeCtr = GameObject.Find("ArcadeMN").GetComponent<GameplayController>();
                 break;
             case 2:
                 break;
@@ -46,14 +44,10 @@ public class ChornowormSC : MonoBehaviour
         if (collision.gameObject.tag == "Player") Exploid();
         else if (collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")
         {
-            float tempDmgTake;
-            tempDmgTake = curHP - (float)player.dmgCur;
-            curHP = tempDmgTake;
-            UpdateHealthBar(curHP);
             if (curHP <= 0)
             {
-                arcadeCtr.IncreaseScore(selfScore);
-                arcadeCtr.UpdadeEnemyKill();
+                //arcadeCtr.IncreaseScore(selfScore);
+                //arcadeCtr.UpdadeEnemyKill();
                 Exploid();
             }
         }
@@ -97,9 +91,5 @@ public class ChornowormSC : MonoBehaviour
         CaculatinNewTarget();
         FireToPlayer();
         StartCoroutine(WaitForChrono());
-    }
-    private void UpdateHealthBar(float hpBeDecrease)
-    {
-        healthBar.fillAmount = hpBeDecrease / maxHP;
     }
 }

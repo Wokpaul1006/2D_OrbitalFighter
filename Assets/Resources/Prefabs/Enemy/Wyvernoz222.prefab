@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 4202832497992998584}
   - component: {fileID: 4202832497992998585}
   - component: {fileID: 4202832497992998586}
-  - component: {fileID: -6639021385215843386}
+  - component: {fileID: 5360289185808648084}
   m_Layer: 0
   m_Name: Wyvernoz222
   m_TagString: Enemies
@@ -207,7 +207,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7817662496090038511}
@@ -337,7 +337,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-6639021385215843386
+--- !u!114 &5360289185808648084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -346,8 +346,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4202832497992998587}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e380319624a4efe468d9c2f0a2646bfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 430721aba51576948b8e9eb2602db9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  broddLings: {fileID: 0}
+  savita: {fileID: 8348341804244783739, guid: 16dc2fc5aae32a647b36e927de47edce, type: 3}
   healthBar: {fileID: 0}

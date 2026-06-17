@@ -5,10 +5,8 @@ using UnityEngine;
 public class SpawnerSC : MonoBehaviour
 {
     //enemies
-    [SerializeField] BloatipinozSC bloats;
     [SerializeField] WyvernozSC wyvern;
     [SerializeField] ArachilingsSC arachiling;
-    [SerializeField] BroodpinosSC broodpinos;
     [SerializeField] BahamozSC bahamoz;
     [SerializeField] ChornowormSC chronoworm;
     [SerializeField] MaciliozSC macilios;
@@ -16,8 +14,8 @@ public class SpawnerSC : MonoBehaviour
     [SerializeField] TharnatosSC thanatos;
 //Controlers
     [HideInInspector] OmniMN genCtr;
-    [HideInInspector] ArcadeGameplaySC arcadeCtr;
-    [HideInInspector] GameplayController storyCtr;
+    [HideInInspector] GameplayController gameplayCtr;
+    [HideInInspector] LevelPlaySC levelPlayCtr;
     public int gameMode;
     public int curLvl;
     private float spawnSpd; //Ajudt this
@@ -28,95 +26,84 @@ public class SpawnerSC : MonoBehaviour
         switch (gameMode)
         {
             case 1:
-                arcadeCtr = GameObject.Find("OBJ_ArcadeModeMN").GetComponent<ArcadeGameplaySC>();
+                gameplayCtr = GameObject.Find("ArcadeMN").GetComponent<GameplayController>();
                 break;
             case 2:
+                levelPlayCtr = GameObject.Find("LevePlayMN").GetComponent<LevelPlaySC>();
                 break;
         }
+        InvokeRepeating(nameof(SpawnEnemiesArcade), 0, 5f);
     }
     #region Arcade Spawn Handler
     public void UpdateCurrentLevelArcade(int i)
     {
         curLvl = i;
-        StartCoroutine(SpawnEnemiesArcade(i));
     }
-    public IEnumerator SpawnEnemiesArcade(int enemiesOder)
+    public void SpawnEnemiesArcade()
     {
-        yield return new WaitForSeconds(3);
-        if(enemiesOder < 10)
+        if(gameplayCtr.isPause == false)
         {
-            switch (enemiesOder)
+            int enemiesOder;
+            enemiesOder = Random.Range(0, 21);
+            if (enemiesOder < 10)
             {
-                case 1:
-                    BloatsSpawn();
-                    break;
-                case 2:
-                    WyvernosSpawn();
-                    BloatsSpawn();
-                    break;
-                case 3:
-                    MorpivernSpawn();
-                    WyvernosSpawn();
-                    break;
-                case 4:
-                    TharnatosSpawn();
-                    MorpivernSpawn();
-                    break;
-                case 5:
-                    BroodpinosSpawn();
-                    TharnatosSpawn();
-                    break;
-                case 6:
-                    ChronoWormSpawn();
-                    BroodpinosSpawn();
-                    break;
-                case 7:
-                    BahamozSpawn();
-                    ChronoWormSpawn();
-                    break;
-                case 8:
-                    MaciliousSpawn();
-                    BahamozSpawn();
-                    break;
-                case 9:
-                    BloatsSpawn();
-                    MorpivernSpawn();
-                    BroodpinosSpawn();
-                    BahamozSpawn();
-                    break;
-                case 10:
-                    BloatsSpawn();
-                    BroodpinosSpawn();
-                    ChronoWormSpawn();
-                    MaciliousSpawn();
-                    BahamozSpawn();
-                    break;
+                switch (enemiesOder)
+                {
+                    case 1:
+                        break;
+                    case 2:
+                        WyvernosSpawn();
+                        break;
+                    case 3:
+                        MorpivernSpawn();
+                        WyvernosSpawn();
+                        break;
+                    case 4:
+                        TharnatosSpawn();
+                        MorpivernSpawn();
+                        break;
+                    case 5:
+                        TharnatosSpawn();
+                        break;
+                    case 6:
+                        ChronoWormSpawn();
+                        break;
+                    case 7:
+                        BahamozSpawn();
+                        ChronoWormSpawn();
+                        break;
+                    case 8:
+                        MaciliousSpawn();
+                        BahamozSpawn();
+                        break;
+                    case 9:
+                        MorpivernSpawn();
+                        BahamozSpawn();
+                        break;
+                    case 10:
+                        ChronoWormSpawn();
+                        MaciliousSpawn();
+                        BahamozSpawn();
+                        break;
+                }
+            }
+            else if (enemiesOder > 10 && enemiesOder < 20)
+            {
+                //Random enemy to spawn
+                //Increase spawn speed
+                //3 spawner on screen
+            }
+            else if (enemiesOder >= 20)
+            {
+                //Random enemy to spawn
+                //5 spawner on screen work independent
+                //Significant increase spawn speed
             }
         }
-        else if (enemiesOder > 10 && enemiesOder < 20)
-        {
-            //Random enemy to spawn
-            //Increase spawn speed
-            //3 spawner on screen
-        }else if( enemiesOder >= 20)
-        {
-            //Random enemy to spawn
-            //5 spawner on screen work independent
-            //Significant increase spawn speed
-        }
-
-        StartCoroutine(SpawnEnemiesArcade(enemiesOder));
     }
     #endregion
 
     #region Object to spawn
-    private void BloatsSpawn()
-    {
-        float randomX;
-        randomX = Random.Range(-3, 3);
-        Instantiate(bloats, new Vector3(randomX, 3, 0), Quaternion.identity);
-        //Invoke("SpawnKamikaze", 0.5f);
-    }
     private void WyvernosSpawn()
     {
         float randomX;
@@ -130,13 +117,6 @@ public class SpawnerSC : MonoBehaviour
         randomX = Random.Range(-3, 3);
         Instantiate(arachiling, new Vector3(randomX, 3, 0), Quaternion.Euler(0, 0, -90f));
         //Invoke("SpawnDualShot", 1.5f);
-    }
-    private void BroodpinosSpawn()
-    {
-        float randomX;
-        randomX = Random.Range(-3, 3);
-        Instantiate(broodpinos, new Vector3(randomX, 3, 0), Quaternion.Euler(0, 0, -90f));
-        //Invoke("SpawnConeShot", 1.75f);
     }
     private void BahamozSpawn()
     {

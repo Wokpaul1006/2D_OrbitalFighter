@@ -7,11 +7,9 @@ public class BahamozSC : MonoBehaviour
 {
     //Move around player in mid-range, release blue fire, cn do melee and self eploid if HP = 10%
     [HideInInspector] OmniMN genCtr;
-    [HideInInspector] ArcadeGameplaySC arcadeCtr;
-    [HideInInspector] GameplayController storyCtr;
+    [HideInInspector] GameplayController arcadeCtr;
     [SerializeField] EBullet savita;
     [HideInInspector] PlayerSC player;
-    [SerializeField] Image healthBar;
     //Unit Prperties
     private float moveSpd;
     private float atkDmg;
@@ -26,7 +24,7 @@ public class BahamozSC : MonoBehaviour
         switch (genCtr.gameMode)
         {
             case 1:
-                arcadeCtr = GameObject.Find("OBJ_ArcadeModeMN").GetComponent<ArcadeGameplaySC>();
+                arcadeCtr = GameObject.Find("ArcadeMN").GetComponent<GameplayController>();
                 break;
             case 2:
                 break;
@@ -44,14 +42,10 @@ public class BahamozSC : MonoBehaviour
         if (collision.gameObject.tag == "Player") Exploid();
         else if (collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")
         {
-            float tempDmgTake;
-            tempDmgTake = curHP - (float)player.dmgCur;
-            curHP = tempDmgTake;
-            UpdateHealthBar(curHP);
             if (curHP <= 0)
             {
-                arcadeCtr.IncreaseScore(selfScore);
-                arcadeCtr.UpdadeEnemyKill();
+                //arcadeCtr.IncreaseScore(selfScore);
+                //arcadeCtr.UpdadeEnemyKill();
                 Exploid();
             }
         }
@@ -76,9 +70,5 @@ public class BahamozSC : MonoBehaviour
         yield return new WaitForSeconds(15);
         Destroy(gameObject);
         StartCoroutine(CountToDead());
-    }
-    private void UpdateHealthBar(float curHPBeDecrease)
-    {
-        healthBar.fillAmount = curHPBeDecrease / maxHP;
     }
 }

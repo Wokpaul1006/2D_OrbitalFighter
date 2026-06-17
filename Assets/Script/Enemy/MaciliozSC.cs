@@ -7,11 +7,9 @@ public class MaciliozSC : MonoBehaviour
 {  
     //Bouncing across screen for any directions, release blue phenomenom case player stun
     [HideInInspector] OmniMN genCtr;
-    [HideInInspector] ArcadeGameplaySC arcadeCtr;
-    [HideInInspector] GameplayController storyCtr;
+    [HideInInspector] GameplayController arcadeCtr;
     [SerializeField] EBullet savita;
     [HideInInspector] PlayerSC player;
-    [SerializeField] Image healthBar;
 
     //Unit Prperties
     private float moveSpd;
@@ -27,7 +25,7 @@ public class MaciliozSC : MonoBehaviour
         switch (genCtr.gameMode)
         {
             case 1:
-                arcadeCtr = GameObject.Find("OBJ_ArcadeModeMN").GetComponent<ArcadeGameplaySC>();
+                arcadeCtr = GameObject.Find("ArcadeMN").GetComponent<GameplayController>();
                 break;
             case 2:
                 break;
@@ -46,14 +44,10 @@ public class MaciliozSC : MonoBehaviour
         if (collision.gameObject.tag == "Player") Exploid();
         else if (collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")
         {
-            float tempDmgTake;
-            tempDmgTake = curHP - (float)player.dmgCur;
-            curHP = tempDmgTake;
-            UpdateHealthBar(curHP);
             if (curHP <= 0)
             {
-                arcadeCtr.IncreaseScore(selfScore);
-                arcadeCtr.UpdadeEnemyKill();
+                //arcadeCtr.IncreaseScore(selfScore);
+                //arcadeCtr.UpdadeEnemyKill();
                 Exploid();
             }
         }
@@ -78,9 +72,5 @@ public class MaciliozSC : MonoBehaviour
         yield return new WaitForSeconds(15);
         Destroy(gameObject);
         StartCoroutine(CountToDead());
-    }
-    private void UpdateHealthBar(float hpBeDecrease)
-    {
-        healthBar.fillAmount = hpBeDecrease / maxHP;
     }
 }

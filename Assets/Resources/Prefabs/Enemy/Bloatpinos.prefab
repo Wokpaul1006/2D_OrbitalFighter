@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3484674419932602728}
   - component: {fileID: 4381050684173503145}
   - component: {fileID: 5417510934616169505}
-  - component: {fileID: 1235553850003094956}
   - component: {fileID: 227438899838926225}
   - component: {fileID: 2428247776692718415}
+  - component: {fileID: 3837710363093416655}
   m_Layer: 0
   m_Name: Bloatpinos
   m_TagString: Enemies
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8186171554028316435}
@@ -116,19 +116,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1235553850003094956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2850990346382277352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 855ea3ca7bb98f54bb3b5661c34e55c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 2124141431369725987}
 --- !u!61 &227438899838926225
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -190,6 +177,20 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &3837710363093416655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2850990346382277352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 430721aba51576948b8e9eb2602db9c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  savita: {fileID: 8348341804244783739, guid: 16dc2fc5aae32a647b36e927de47edce, type: 3}
+  healthBar: {fileID: 2124141431369725987}
 --- !u!1 &8016638933491976774
 GameObject:
   m_ObjectHideFlags: 0

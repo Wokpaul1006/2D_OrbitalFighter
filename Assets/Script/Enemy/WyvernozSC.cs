@@ -8,10 +8,8 @@ public class WyvernozSC : MonoBehaviour
     //Move Linear top down, release savita repeatly
     [HideInInspector] PlayerSC player;
     [HideInInspector] OmniMN genCtr;
-    [HideInInspector] ArcadeGameplaySC arcadeCtr;
-    [HideInInspector] GameplayController storyCtr;
+    [HideInInspector] GameplayController arcadeCtr;
     [SerializeField] EBullet savita;
-    [SerializeField] Image healthBar;
     //Unit Prperties
     private float moveSpd;
     private float atkDmg;
@@ -26,7 +24,7 @@ public class WyvernozSC : MonoBehaviour
         switch (genCtr.gameMode)
         {
             case 1:
-                arcadeCtr = GameObject.Find("OBJ_ArcadeModeMN").GetComponent<ArcadeGameplaySC>();
+                arcadeCtr = GameObject.Find("ArcadeMN").GetComponent<GameplayController>();
                 break;
             case 2:
                 break;
@@ -45,14 +43,10 @@ public class WyvernozSC : MonoBehaviour
         if (collision.gameObject.tag == "Player") Exploid();
         else if (collision.gameObject.tag == "PAmmo" || collision.gameObject.tag == "PMelee")
         {
-            float tempDmgTake;
-            tempDmgTake = curHP - (float)player.dmgCur;
-            curHP = tempDmgTake;
-            UpdateHealthBar(curHP);
             if (curHP <= 0)
             {
-                arcadeCtr.IncreaseScore(selfScore);
-                arcadeCtr.UpdadeEnemyKill();
+                //arcadeCtr.IncreaseScore(selfScore);
+                //arcadeCtr.UpdadeEnemyKill();
                 Exploid();
             }
         }
@@ -84,9 +78,5 @@ public class WyvernozSC : MonoBehaviour
         yield return new WaitForSeconds(atkSpd);
         Instantiate(savita, transform.position, Quaternion.identity);
         StartCoroutine(RelaseSavita());
-    }
-    private void UpdateHealthBar(float hpBeDecrease)
-    {
-        healthBar.fillAmount = hpBeDecrease/maxHP;
     }
 }
