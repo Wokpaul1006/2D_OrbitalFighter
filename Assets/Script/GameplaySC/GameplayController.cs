@@ -12,24 +12,28 @@ public class GameplayController : MonoBehaviour
     [SerializeField] List<Transform> defPos = new List<Transform>();
     [SerializeField] PlayerSC player;
     [SerializeField] List<SpawnerSC> spawn = new List<SpawnerSC>();
-    [SerializeField] Text lvlTxt, pointTxt;
+    [SerializeField] Text lvlTxt, pointTxt, startgameCountDownTxt;
+    [SerializeField] GameObject countdownPnl;
 
     [HideInInspector] public List<Vector3> playerPos = new List<Vector3>();
 
     [Header("Variables")]
-    public int gLevel;
+    public int gLevel, startgameCountdown;
     public int enemiesKilled;
     public bool isPause;
     private int arcadeLife = 3;
     public int arcadeLv, arcadeScore, targetLv;
     void Start()
     {
+        startgameCountdown = 5;
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         data = GameObject.Find("OBJ_DataCtr").GetComponent<DataSC>();
         SetupPlayerPos();
         SpawnPlayer();
         isPause = true;
         Invoke(nameof(EnablePlayGame), 5f);
+        InvokeRepeating(nameof(CountdownStartGame), 0f, 1f);
+        UpdateUIArcade();
     }
 
     private void SpawnPlayer() => player = Instantiate(player, playerPos[2], Quaternion.identity);
@@ -41,10 +45,7 @@ public class GameplayController : MonoBehaviour
         playerPos.Add(new Vector3(1, -3, 0));
         playerPos.Add(new Vector3(2, -3, 0));
     }
-    private void EnablePlayGame()
-    {
-        isPause = false;
-    }
+    private void EnablePlayGame() { isPause = false; }
     public void OnOutOfHP()
     {
         if (arcadeLife > 0)
@@ -61,8 +62,7 @@ public class GameplayController : MonoBehaviour
     private void OnOutOfLife()
     {
         genCtr.OnShowGameOver();
-        int tempCoin = data.pCoin + arcadeScore;
-        data.UpdatePlayerEconomics(1, tempCoin, 0);
+        OnCountPointOnFinal(arcadeScore);
     }
     public void IncreaseScore(int score)
     {
@@ -73,7 +73,7 @@ public class GameplayController : MonoBehaviour
             arcadeLv++;
             DetermineLevel();
         }
-        //UpdatePlayerStat(arcadeHP, arcadeAP, arcadeAmmo, arcadeScore, arcadeLv); //Update score
+        UpdateUIArcade();
     }
     private void DetermineLevel()
     {
@@ -93,5 +93,23 @@ public class GameplayController : MonoBehaviour
     public void OnBuyDefPoint()
     {
 
+    }
+    private void CountdownStartGame()
+    {
+        startgameCountdown--;
+        startgameCountDownTxt.text = startgameCountdown.ToString();
+        if (startgameCountdown <= 0) countdownPnl.SetActive(false);
+    }
+    public void UpdateUIArcade()
+    {
+        lvlTxt.text = arcadeLv.ToString();
+        pointTxt.text = arcadeScore.ToString(); ;
+    }
+    public void OnCountPointOnFinal(int value)
+    {
+        //call only when done
+        int tempScore;
+        tempScore = data.pCoin + value;
+        data.UpdateCoin(tempScore);
     }
 }

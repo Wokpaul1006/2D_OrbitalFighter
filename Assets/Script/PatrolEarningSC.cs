@@ -37,7 +37,6 @@ public class PatrolEarningSC : MonoBehaviour
     #region Handle Claim Daily
     void ShowRewardDaily()
     {
-        print(data.pAllowClaimDaily);
         if (data.pLastDailyClaim == "")
         {
             //First day of play
@@ -106,45 +105,43 @@ public class PatrolEarningSC : MonoBehaviour
         rewardBtn[streakDaily].GetComponent<Button>().interactable = false;
         lastCollectDay = DateTime.Today.Day.ToString();
         isAllowDailyClaim = false;
-        tempFinalScoreToOverride = rewardToGive;
+        tempFinalScoreToOverride = rewardToGive + data.pCoin;
         streakDaily++;
+
         data.UpdateAllowClaimDaily(1);
-
-        print("tempFinalScoreToOverride = " + tempFinalScoreToOverride);
-
-        data.UpdatePlayerEconomics(1, tempFinalScoreToOverride,0); // Update score
+        data.UpdateCoin(tempFinalScoreToOverride); // Update score
         data.UpdateStreak(streakDaily); //Update streak
         data.UpdatePatrolDailyReward(lastCollectDay); //Update last collect day
         ShowRewardDaily();
-        menu.OnUserInfor();
+        menu.OnSetUI();
     }
     private void SelectRewardDaily()
     {
         switch (streakDaily)
         {
             case 0:
-                baseReward = 10;
+                rewardToGive = 10;
                 break;
             case 1:
-                baseReward = 20;
+                rewardToGive = 20;
                 break;
             case 2:
-                baseReward = 40;
+                rewardToGive = 40;
                 break;
             case 3:
-                baseReward = 80;
+                rewardToGive = 80;
                 break;
             case 4:
-                baseReward = 160;
+                rewardToGive = 160;
                 break;
             case 5:
-                baseReward = 320;
+                rewardToGive = 320;
                 break;
             case 6:
-                baseReward = 640;
+                rewardToGive = 640;
                 break;
             case 7:
-                baseReward = 1280;
+                rewardToGive = 1280;
                 OnResetStreak();
                 break;
         }

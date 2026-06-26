@@ -31,9 +31,9 @@ public class OmniMN : Singleton<OmniMN>
     void Start()
     {
         SettingStart();
-        OnCheckPlay();
         toDay = DateTime.Today.Day.ToString();
         versionTxt.text = Application.version.ToString();
+        dataControl.UpdateFirsrtPlay(); //confirm player played
     }
     public void OnChangeScene(int sceneOder)
     {
@@ -75,17 +75,6 @@ public class OmniMN : Singleton<OmniMN>
     }
 
     #region Check if Player First Play or not
-    private void OnCheckPlay()
-    {
-        if (hasPlayed == 0)
-        {
-            //Case of first play, set this field to 1 mean not first play any more
-            PlayerPrefs.SetInt("HasPlayed", 1);
-            SetNewPlayer();
-        }
-        else if (hasPlayed == 1) LoadOldPlayer(); //Case of not First Play
-    }
-    private void SetNewPlayer() => dataControl.SetNewPlayer();
     public void LoadOldPlayer() => dataControl.LoadOldPlayer();
     #endregion
 

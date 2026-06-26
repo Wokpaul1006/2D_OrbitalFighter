@@ -14,12 +14,12 @@ public class CreditsSC : MonoBehaviour
     }
     void AssitMethods()
     {
-        FBBtn.onClick.AddListener(ToFB);
-        XBtn.onClick.AddListener(ToX);
-        YTBBtn.onClick.AddListener(ToYTB);
-        SiteBtn.onClick.AddListener(ToSite);
-        TiktokBtn.onClick.AddListener(ToTT);
-        StoreBtn.onClick.AddListener(ToStore);
+        //FBBtn.onClick.AddListener(ToFB);
+        //XBtn.onClick.AddListener(ToX);
+        //YTBBtn.onClick.AddListener(ToYTB);
+        //SiteBtn.onClick.AddListener(ToSite);
+        //TiktokBtn.onClick.AddListener(ToTT);
+        //StoreBtn.onClick.AddListener(ToStore);
     }
     private void ToFB() => genCtr.ToFB();
     private void ToYTB() => genCtr.ToYTB();

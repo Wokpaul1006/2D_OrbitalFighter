@@ -11,19 +11,27 @@ public class MainMenuSC : MonoBehaviour
     [SerializeField] Text gemTxt, coinTxtl, curLevel;
 
     public List<GameObject> panels = new List<GameObject>();
-    private int cointToShow, gemToShow;
+    private int cointToShow, gemToShow, levelToShow;
     private void Start()
     {
         genCtr = GameObject.Find("GeneralMN").GetComponent<OmniMN>();
         data = GameObject.Find("OBJ_DataCtr").GetComponent<DataSC>();
-        //LoadUserInRuntime();
+
         ClearAllPanels();
+        OnSetUI();
     }
     public void OnSetUI()
     {
+        gemToShow = data.pGems;
+        cointToShow = data.pCoin;
+        levelToShow = data.pLevelPlay;
+
+        print("data.Pcoin = " + data.pCoin);
+        print("in set UI, coin = " + cointToShow);
+
         gemTxt.text = gemToShow.ToString()+"C";
         coinTxtl.text = cointToShow.ToString()+"D";
-        curLevel.text = "xxx";
+        curLevel.text = "LEVEL " + levelToShow.ToString();
     }
 
     private void ClearAllPanels()
@@ -32,13 +40,6 @@ public class MainMenuSC : MonoBehaviour
         {
             if(panels[i].activeSelf) panels[i].gameObject.SetActive(false);
         }
-    }
-    public void LoadUserInRuntime()
-    {
-        //Call everytime in-game need to load data
-        gemToShow = data.pGems;
-        cointToShow = data.pCoin;
-        OnSetUI();
     }
     #region Switch Scene & Panels
     public void ToArcade()

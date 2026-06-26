@@ -88,7 +88,7 @@ public class DataSC : MonoBehaviour
         pLastDailyClaim = PlayerPrefs.GetString("LastPatrolDailyTime");
         pAllowClaimDaily = PlayerPrefs.GetInt("AllowClaimDaily");
         pDailyStreak = PlayerPrefs.GetInt("PatrolDailyStreak");
-
+        
         CheckSoundState();
     }
     public void CheckSoundState()
@@ -106,19 +106,15 @@ public class DataSC : MonoBehaviour
         PlayerPrefs.SetInt("SFXState", curSFXState);
         PlayerPrefs.SetInt("ThemeState", curThemeState);
     }
-    public void UpdatePlayerEconomics(int state, int coin, int gems)
+    public void UpdateCoin(int value)
     {
-        switch (state)
-        {
-            case 0:
-                PlayerPrefs.SetInt("Totalscore", pCoin);
-                pCoin = PlayerPrefs.GetInt("Totalscore");
-                break;
-            case 1:
-                PlayerPrefs.SetInt("TotalGems", pGems);
-                pGems = PlayerPrefs.GetInt("TotalGems");
-                break;
-        }
+        PlayerPrefs.SetInt("Totalscore", value);
+        pCoin = PlayerPrefs.GetInt("Totalscore");
+    }
+    public void UpdateDiamons(int value)
+    {
+        PlayerPrefs.SetInt("TotalGems", value);
+        pGems = PlayerPrefs.GetInt("TotalGems");
     }
     public void UpdateHighScore(int value)
     {
@@ -165,7 +161,7 @@ public class DataSC : MonoBehaviour
     public void UpdateAllowClaimDaily(int state)
     {
         PlayerPrefs.SetInt("AllowClaimDaily", state);
-        pAllowClaimDaily = PlayerPrefs.GetInt("AllowClaimAllowClaimDaily");
+        pAllowClaimDaily = PlayerPrefs.GetInt("AllowClaimDaily");
     }
     public void UpdateStreak(int value)
     {
@@ -175,7 +171,7 @@ public class DataSC : MonoBehaviour
     #endregion
     private bool CheckFirstPlay()
     {
-        if (PlayerPrefs.GetInt("HasPlayed") == 0) return isFirstPlay = true;
+        if (PlayerPrefs.GetInt("HasPlayed") == 0 || PlayerPrefs.GetInt("HasPlayed") == null) return isFirstPlay = true;
         else return false;
     }
 }

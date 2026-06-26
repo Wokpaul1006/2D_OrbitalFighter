@@ -15,11 +15,12 @@ public class PlayerSC : MonoBehaviour
     [HideInInspector] GameplayController gameplayCtr;
     [HideInInspector] LevelPlaySC levelPlayCtr;
     [HideInInspector] List<Vector3> playrPosTransform = new List<Vector3>();
+    [SerializeField] GameObject muzzleSplash;
     Vector2 startTouchPos;
 
     #region clarify player stat
     public int baseHP = 100;
-    public float fireRate = 3f; // seconds between calls
+    public float fireRate; // seconds between calls
     private float timer = 0f;
     private int curPos = 2;
     private int playerWeaponType;
@@ -32,6 +33,7 @@ public class PlayerSC : MonoBehaviour
         AssistPlayerFireRate();
         Invoke(nameof(AssistPlayerPos), 1f); //Waith 1 second then assit player pos datas
         InvokeRepeating(nameof(OnAutomaticFire), 0f, fireRate);
+
     }
     #region Player Init
     private void SettingStartGame()
@@ -50,7 +52,7 @@ public class PlayerSC : MonoBehaviour
     }
     private void GetPlayerStatforStart()
     {
-
+        fireRate = 1f;
     }
    
     private void AssistPlayerPos()
@@ -124,10 +126,7 @@ public class PlayerSC : MonoBehaviour
     private bool IsPointerOverUI()
     {
         //For mobile touches
-        if (Input.touchCount > 0)
-        {
-            return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
-        }
+        if (Input.touchCount > 0) { return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId); }
 
         // For mouse (editor, PC testing)
         return EventSystem.current.IsPointerOverGameObject();
@@ -137,10 +136,10 @@ public class PlayerSC : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch t = Input.GetTouch(0);
-            if (t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
+            if (t.phase == TouchPhase.Began)
             {
                 float screenMid = Screen.width / 2;
-                if (t.position.x > screenMid)
+                if (t.position.x < screenMid)
                 {
                     curPos--;
                     if (curPos < 0)
@@ -149,7 +148,7 @@ public class PlayerSC : MonoBehaviour
                     }
                     transform.DOMove(playrPosTransform[curPos], 0.5f);
                 }
-                else if (t.position.x < screenMid)
+                else if (t.position.x > screenMid)
                 {
                     curPos++;
                     if (curPos > 4)
@@ -170,7 +169,7 @@ public class PlayerSC : MonoBehaviour
             {
                 curPos = 0;
             }
-            transform.DOMove(playrPosTransform[curPos], 0.5f);
+            transform.DOMove(playrPosTransform[curPos], 0.1f);
         }else if (Input.GetKeyDown(KeyCode.D))
         {
 
@@ -179,7 +178,7 @@ public class PlayerSC : MonoBehaviour
             {
                 curPos = 4;
             }
-            transform.DOMove(playrPosTransform[curPos], 0.5f);
+            transform.DOMove(playrPosTransform[curPos], 0.1f);
         }
     }
 
@@ -188,6 +187,7 @@ public class PlayerSC : MonoBehaviour
         if(gameplayCtr.isPause == false)
         {
             Instantiate(bullet, transform.position, Quaternion.identity);
+            //OnShowMuzzlePlash(true);
         }
     }
     #endregion

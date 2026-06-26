@@ -14,7 +14,7 @@ public class WyvernozSC : EnemySC
     {
         moveSpd = 1f;
         atkSpd = 2;
-        curHP = 3;
+        curHP = 1;
         selfScore = 2;
     }
 }

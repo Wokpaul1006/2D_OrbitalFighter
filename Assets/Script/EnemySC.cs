@@ -41,8 +41,7 @@ public class EnemySC : MonoBehaviour
         {
             if (curHP <= 0)
             {
-                //arcadeCtr.IncreaseScore(selfScore);
-                //arcadeCtr.UpdadeEnemyKill();
+                arcadeCtr.IncreaseScore(selfScore);
                 Exploid();
             }
         }
